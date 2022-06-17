@@ -1,0 +1,25 @@
+<div class="neck">
+  <ul class="strings">
+    <li *ngFor="let string of strings"></li>
+  </ul>
+
+  <ul class="tuning">
+    <li *ngFor="let tuning of tuning">{{tuning}}</li>
+  </ul>
+
+  <div class="notes">
+    <div *ngFor="let string of strings" [ngClass]="{string}">
+      <ul>
+        <li *ngFor="let note of string" appNote [note]="note">{{note}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <ul class="frets">
+    <li *ngFor="let e of [].constructor(13)"></li>
+  </ul>
+</div>
+scale-chart debug:
+{{tune}}
+{{key}}
+{{quality}}
