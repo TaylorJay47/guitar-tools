@@ -10,7 +10,7 @@
   <div class="notes">
     <div *ngFor="let string of strings" [ngClass]="{string}">
       <ul>
-        <li *ngFor="let note of string" appNote [note]="note">{{note}}</li>
+        <li class="{{note}}" *ngFor="let note of string" appNote [note]="note">{{note}}</li>
       </ul>
     </div>
   </div>

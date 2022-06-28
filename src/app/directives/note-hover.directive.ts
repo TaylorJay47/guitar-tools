@@ -10,6 +10,7 @@ export class NoteDirective {
 
   @HostListener('mouseenter') onMouseEnter() {
     this.highlight('limegreen');
+    console.log('The note value here is ' + this.note);
   }
 
   @HostListener('mouseleave') onMouseLeave() {
@@ -17,16 +18,15 @@ export class NoteDirective {
   }
 
   @HostListener('click') onClick() {
-    if ($('[ng-reflect-note="' + this.note + '"]').css('opacity') === '0.15'){
-      $('[ng-reflect-note="' + this.note + '"]').css('opacity', '');
+    if ($('.' + this.note).css('opacity') === '0.15'){
+      $('.' + this.note).css('opacity', '');
     } else {
-      $('[ng-reflect-note="' + this.note + '"]').css('opacity', '15%');
+      $('.' + this.note).css('opacity', '15%');
     }
   }
 
   private highlight(color: string) {
     this.el.nativeElement.style.backgroundColor = color;
-    console.log('The note value here is ' + this.note);
-    $('[ng-reflect-note="' + this.note + '"]').css('background-color',color);
+    $('.' + this.note).css('background-color',color);
   }
 }
