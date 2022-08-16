@@ -10,7 +10,6 @@ export class NoteDirective {
 
   @HostListener('mouseenter') onMouseEnter() {
     this.highlight('limegreen');
-    console.log('The note value here is ' + this.note);
   }
 
   @HostListener('mouseleave') onMouseLeave() {

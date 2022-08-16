@@ -9,7 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ScalesComponent } from './scales/scales.component';
 import { ChordDecoderComponent } from './chord-decoder/chord-decoder.component';
 import { HomeComponent } from './home/home.component';
-import { ScaleChartComponent } from './scale-chart/scale-chart.component';
+import { NeckComponent } from './neck/neck.component';
+import { NeckControlsComponent } from "./neck-controls/neck-controls.component";
 import { NoteDirective } from './directives/note-hover.directive';
 import * as $ from 'jquery';
 
@@ -20,7 +21,8 @@ import * as $ from 'jquery';
     ScalesComponent,
     ChordDecoderComponent,
     HomeComponent,
-    ScaleChartComponent,
+    NeckComponent,
+    NeckControlsComponent,
     NoteDirective
   ],
     imports: [

@@ -1,0 +1,29 @@
+<form class="controls" [formGroup]="controlsForm">
+  <div class="inputs-row">
+    <div>
+      <label for="tuning">Tuning: </label>
+      <select class="form-control m-sm-2" name="tuning" formControlName="tuningControl" [(ngModel)]="tune" >
+        <option id="tuning" disabled>Select Tuning</option>
+        <option *ngFor="let tuning of tunings">{{tuning}}</option>
+      </select>
+    </div>
+    <div>
+      <label for="key">Key: </label>
+      <select class="form-control m-sm-2" name="key" formControlName="keyControl" [(ngModel)]="key">
+        <option id="key" disabled>Select Key</option>
+        <option *ngFor="let key of keys">{{key}}</option>
+      </select>
+    </div>
+    <div>
+      <label for="quality">Quality: </label>
+      <select class="form-control m-sm-2" name="quality" formControlName="qualityControl" [(ngModel)]="quality">
+        <option id="quality" disabled>Select Quality</option>
+        <option *ngFor="let quality of qualities">{{quality}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="buttons-row">
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <button class="btn btn-outline-secondary" (click)="onReset()">Reset</button>
+  </div>
+</form>

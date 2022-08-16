@@ -1,0 +1,45 @@
+.controls {
+  display: flex;
+  flex-direction: row;
+  margin-top: 300px;
+  width: 970px;
+  border: darkgrey 1px solid;
+  border-radius: 5px;
+}
+
+form div {
+  max-width: 930px;
+}
+
+.inputs-row {
+  border-right: darkgrey 1px solid;
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-grow: 2;
+  justify-content: center;
+}
+
+.inputs-row div {
+  display: inline-flex;
+}
+
+.buttons-row {
+  min-width: 150px;
+}
+
+label {
+  margin: 10px;
+}
+
+select {
+  padding: 0;
+  margin-left: 0;
+  max-height: 30px;
+  width: 125px;
+}
+
+button {
+  margin: 10px;
+  padding: 0 5px 0 5px;
+  max-height: 30px ;
+}
