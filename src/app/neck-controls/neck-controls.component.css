@@ -38,6 +38,13 @@ select {
   width: 125px;
 }
 
+input {
+  padding: 0;
+  margin-left: 0;
+  max-height: 30px;
+  width: 125px;
+}
+
 button {
   margin: 10px;
   padding: 0 5px 0 5px;

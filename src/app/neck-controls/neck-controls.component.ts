@@ -8,12 +8,14 @@ import {Music} from "../util/music";
   styleUrls: ['./neck-controls.component.css']
 })
 export class NeckControlsComponent implements OnInit {
+  @Input() mode: string = 'Scales'
   @Input() tune: string = 'Standard';
   @Output() tuneChange = new EventEmitter<string>()
   @Input() key: string = 'C';
   @Output() keyChange = new EventEmitter<string>()
   @Input() quality: string = 'Major';
   @Output() qualityChange = new EventEmitter<string>()
+  @Output() submitEvent = new EventEmitter<any>()
   oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
@@ -37,34 +39,38 @@ export class NeckControlsComponent implements OnInit {
   });
 
   onSubmit() {
-    if (this.tune !== this.oldTune) {
-      if (this.tune) {
-        this.tuneChange.emit(this.tune)
-        this.oldTune = this.tune;
+    if (this.mode === 'scales'){
+      if (this.tune !== this.oldTune) {
+        if (this.tune) {
+          this.tuneChange.emit(this.tune)
+          this.oldTune = this.tune;
+        }
       }
-    }
-    if (this.key !== this.oldKey) {
-      if (this.key) {
-        this.keyChange.emit(this.key)
-        this.oldKey = this.key;
+      if (this.key !== this.oldKey) {
+        if (this.key) {
+          this.keyChange.emit(this.key)
+          this.oldKey = this.key;
+        }
       }
-    }
-    if (this.quality !== this.oldQuality) {
-      if (this.quality) {
-        this.qualityChange.emit(this.quality)
-        this.oldQuality = this.quality;
+      if (this.quality !== this.oldQuality) {
+        if (this.quality) {
+          this.qualityChange.emit(this.quality)
+          this.oldQuality = this.quality;
+        }
       }
+      this.submitEvent.emit()
     }
   }
 
   onReset() {
-    //this.controlsForm.controls.tuningControl.setValue('Standard')
-    this.tune = 'Standard'
-    this.tuneChange.emit(this.tune)
-    this.key = 'C'
-    this.keyChange.emit(this.key)
-    this.quality = 'Major'
-    this.qualityChange.emit(this.quality)
+    if (this.mode === 'scales') {
+      this.tune = this.oldTune
+      this.tuneChange.emit(this.tune)
+      this.key = this.oldKey
+      this.keyChange.emit(this.key)
+      this.quality = this.oldQuality
+      this.qualityChange.emit(this.quality)
+    }
   }
 
   //TODO add form for scale selection

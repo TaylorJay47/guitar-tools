@@ -18,9 +18,5 @@
   <ul class="frets">
     <li *ngFor="let e of [].constructor(13)"></li>
   </ul>
-  <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality"></app-neck-controls>
+  <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (submitEvent)="updateKey()" [mode]="mode"></app-neck-controls>
 </div>
-scale-chart debug:
-{{tune}}
-{{key}}
-{{quality}}
