@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {Component, OnInit, Input, Output, EventEmitter, DoCheck} from '@angular/core';
 import { Music } from '../util/music';
 import {NoteToggleService} from "../services/note-toggle.service";
@@ -8,20 +9,22 @@ import {NoteToggleService} from "../services/note-toggle.service";
   styleUrls: ['./neck.component.css']
 })
 export class NeckComponent implements OnInit, DoCheck {
-  @Input() tune: string = 'Standard';
-  @Input() key: string = 'C';
-  @Input() quality: string = 'Major';
+  @Input() mode: string = 'scales'
+  tune: string = 'Standard';
+  key: string = 'C';
+  quality: string = 'Major';
   oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
-  // @ts-ignore
   strings = Music.tunings[this.tune].strings;
-  // @ts-ignore
   tuning = Music.tunings[this.tune].tuning;
 
   constructor(private noteToggleService: NoteToggleService) {}
 
   ngOnInit(): void {
+    if (this.mode === 'scales'){
+      this.updateKey()
+    }
   }
 
   ngDoCheck() {
@@ -52,13 +55,27 @@ export class NeckComponent implements OnInit, DoCheck {
   }
 
   updateStrings() {
-    // @ts-ignore
     this.strings = Music.tunings[this.tune].strings;
   }
 
   updateTuning() {
-    // @ts-ignore
     this.tuning = Music.tunings[this.tune].tuning;
+  }
+
+  updateKey() {
+    setTimeout(() => {
+      this.noteToggleService.disableAll()
+    }, 100)
+    this.noteToggleService.enabled = []
+    for (let int of Music.quality[this.quality].scaleIntervals) {
+      this.noteToggleService.enabled.push(Music.notes[this.key][int])
+      console.log(this.noteToggleService.enabled)
+    }
+    for (let note of this.noteToggleService.enabled){
+      setTimeout(() => {
+        this.noteToggleService.toggle(note)
+      }, 350)
+    }
   }
 
   toggleNote(note: string){
