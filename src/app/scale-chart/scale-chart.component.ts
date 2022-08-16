@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Music } from '../util/music';
+import {NoteToggleService} from "../services/note-toggle.service";
 
 @Component({
   selector: 'app-scale-chart',
@@ -15,7 +16,7 @@ export class ScaleChartComponent implements OnInit {
   // @ts-ignore
   tuning = Music.tunings[this.tune].tuning;
 
-  constructor() {}
+  constructor(private noteToggleService: NoteToggleService) {}
 
   ngOnInit(): void {
   }
@@ -33,5 +34,9 @@ export class ScaleChartComponent implements OnInit {
   updateTuning() {
     // @ts-ignore
     this.tuning = Music.tunings[this.tune].tuning;
+  }
+
+  toggleNote(note: string){
+    this.noteToggleService.toggle(note);
   }
 }
