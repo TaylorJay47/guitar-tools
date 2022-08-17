@@ -1,5 +1,5 @@
 // @ts-nocheck
-import {Component, OnInit, Input, Output, EventEmitter, DoCheck} from '@angular/core';
+import {Component, OnInit, Input, DoCheck} from '@angular/core';
 import { Music } from '../util/music';
 import {NoteToggleService} from "../services/note-toggle.service";
 
@@ -25,6 +25,22 @@ export class NeckComponent implements OnInit, DoCheck {
     if (this.mode === 'scales'){
       this.updateKey()
     }
+    setTimeout(() => {
+      for (let note of Music.notes['E']){
+        let counter = 1
+        if (note.length === 2){
+          $('li.' + note.charAt(0) + '\\#').each((index, element) => {
+            $(element).addClass(counter.toString())
+            counter++
+          })
+        } else {
+          $('li.' + note).each((index, element) => {
+            $(element).addClass(counter.toString())
+            counter++
+          })
+        }
+      }
+    }, 500)
   }
 
   ngDoCheck() {
@@ -69,7 +85,6 @@ export class NeckComponent implements OnInit, DoCheck {
     this.noteToggleService.enabled = []
     for (let int of Music.quality[this.quality].scaleIntervals) {
       this.noteToggleService.enabled.push(Music.notes[this.key][int])
-      console.log(this.noteToggleService.enabled)
     }
     for (let note of this.noteToggleService.enabled){
       setTimeout(() => {

@@ -4,7 +4,7 @@
   </ul>
 
   <ul class="tuning">
-    <li *ngFor="let tuning of tuning">{{tuning}}</li>
+    <li *ngFor="let tuning of tuning" class="{{tuning}}">{{tuning}}</li>
   </ul>
 
   <div class="notes">
@@ -16,7 +16,14 @@
   </div>
 
   <ul class="frets">
-    <li *ngFor="let e of [].constructor(13)"></li>
+    <li *ngFor="let f of [].constructor(12)"></li>
   </ul>
+
+  <ul class="dots">
+    <li class="first" *ngFor="let d of [].constructor(4)"></li>
+  </ul>
+</div>
+<div class="controls">
   <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (submitEvent)="updateKey()" [mode]="mode"></app-neck-controls>
 </div>
+
