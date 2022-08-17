@@ -1,6 +1,9 @@
+// @ts-nocheck
 import {Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Music} from "../util/music";
+import {ChordDecoderService} from "../services/chord-decoder.service";
+import {NoteToggleService} from "../services/note-toggle.service";
 
 @Component({
   selector: 'app-neck-controls',
@@ -16,11 +19,13 @@ export class NeckControlsComponent implements OnInit {
   @Input() quality: string = 'Major';
   @Output() qualityChange = new EventEmitter<string>()
   @Output() submitEvent = new EventEmitter<any>()
+  chord = ''
   oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
 
-  constructor() {};
+  constructor(private chordDecoderService: ChordDecoderService,
+              private noteToggleService: NoteToggleService) {};
 
   ngOnInit(): void {};
 
@@ -29,13 +34,16 @@ export class NeckControlsComponent implements OnInit {
     return val.name;
   });
   qualities = Object.entries(Music.quality).map(([key, val]) => {
-    return val.name;
-  });
+    if (val.scaleIntervals){
+      return val.name;
+    }
+  }).filter(scale => scale);
 
   controlsForm = new FormGroup({
     tuningControl: new FormControl('Standard'),
     keyControl: new FormControl('C'),
-    qualityControl: new FormControl('Major')
+    qualityControl: new FormControl('Major'),
+    chordControl: new FormControl('')
   });
 
   onSubmit() {
@@ -59,6 +67,26 @@ export class NeckControlsComponent implements OnInit {
         }
       }
       this.submitEvent.emit()
+    } else if (this.mode === 'chords'){
+      if (this.tune !== this.oldTune) {
+        if (this.tune) {
+          this.tuneChange.emit(this.tune)
+          this.oldTune = this.tune;
+        }
+      }
+
+      setTimeout(() => {
+        this.noteToggleService.disableAll()
+      }, 100)
+      this.noteToggleService.enabled = []
+      for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
+        this.noteToggleService.enabled.push(Music.notes[this.chord.charAt(1) === '#' ? this.chord.substring(0,2) : this.chord.charAt(0)][int])
+      }
+      for (let note of this.noteToggleService.enabled){
+        setTimeout(() => {
+          this.noteToggleService.toggle(note)
+        }, 350)
+      }
     }
   }
 
@@ -70,6 +98,10 @@ export class NeckControlsComponent implements OnInit {
       this.keyChange.emit(this.key)
       this.quality = this.oldQuality
       this.qualityChange.emit(this.quality)
+    } else if (this.mode === 'chords') {
+      this.tune = this.oldTune
+      this.tuneChange.emit(this.tune)
+      this.chord = ''
     }
   }
 
