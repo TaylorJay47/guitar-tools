@@ -27,6 +27,6 @@
   </ul>
 </div>
 <div class="controls">
-  <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (submitEvent)="updateKey()" [mode]="mode"></app-neck-controls>
+  <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"></app-neck-controls>
 </div>
 

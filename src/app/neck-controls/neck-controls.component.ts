@@ -1,6 +1,6 @@
 // @ts-nocheck
-import {Component, DoCheck, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Music} from "../util/music";
 import {ChordDecoderService} from "../services/chord-decoder.service";
 import {NoteToggleService} from "../services/note-toggle.service";
@@ -19,6 +19,7 @@ export class NeckControlsComponent implements OnInit {
   @Input() quality: string = 'Major';
   @Output() qualityChange = new EventEmitter<string>()
   @Output() submitEvent = new EventEmitter<any>()
+  @Output() resetNotes = new EventEmitter<any>()
   chord = ''
   oldTune = 'Standard'
   oldKey = 'C'
@@ -48,6 +49,9 @@ export class NeckControlsComponent implements OnInit {
 
   onSubmit() {
     if (this.mode === 'scales'){
+      setTimeout(() => {
+        this.noteToggleService.resetQuality()
+      }, 100)
       if (this.tune !== this.oldTune) {
         if (this.tune) {
           this.tuneChange.emit(this.tune)
@@ -67,6 +71,33 @@ export class NeckControlsComponent implements OnInit {
         }
       }
       this.submitEvent.emit()
+
+      setTimeout(() => {
+        this.noteToggleService.disableAll()
+      }, 100)
+      this.noteToggleService.enabled = []
+      for (let int of Music.quality[this.quality].scaleIntervals) {
+        let note = Music.notes[this.key][Math.floor(int)]
+        this.noteToggleService.enabled.push(note)
+        setTimeout(() => {
+          if (int.toString().length > 2 && note.length === 2) {
+            let noteCheck = Music.notes['E'][Music.notes['E'].indexOf(note) - 2]
+            if ($("li:contains(" + noteCheck + ")").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            } else if ($("li:contains(" + note.charAt(0) + "b)").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            } else if ($("li:contains(" + note.charAt(0) + ")").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            }
+          }
+        }, 250)
+      }
+      for (let note of this.noteToggleService.enabled){
+        setTimeout(() => {
+          this.noteToggleService.toggle(note)
+        }, 350)
+      }
+
     } else if (this.mode === 'chords'){
       if (this.tune !== this.oldTune) {
         if (this.tune) {
@@ -77,10 +108,26 @@ export class NeckControlsComponent implements OnInit {
 
       setTimeout(() => {
         this.noteToggleService.disableAll()
+        this.noteToggleService.resetQuality()
       }, 100)
       this.noteToggleService.enabled = []
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
-        this.noteToggleService.enabled.push(Music.notes[this.chord.charAt(1) === '#' ? this.chord.substring(0,2) : this.chord.charAt(0)][int])
+        let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ? this.chord.substring(0,2) : this.chord.charAt(0)][Math.floor(int)]
+        this.noteToggleService.enabled.push(note)
+        setTimeout(() => {
+          if (int.toString().length > 2 && note.length === 2) {
+            let noteCheck = Music.notes['E'][Music.notes['E'].indexOf(note) - 2]
+            if ($("li:contains(" + noteCheck + ")").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            } else if ($("li:contains(" + note.charAt(0) + "b)").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            } else if ($("li:contains(" + note.charAt(0) + ")").css('opacity') > '0.15') {
+              this.noteToggleService.flatten(note)
+            }
+          } else if (this.chord.charAt(1) === 'b' && note.length === 2) {
+            this.noteToggleService.flatten(note)
+          }
+        }, 250)
       }
       for (let note of this.noteToggleService.enabled){
         setTimeout(() => {

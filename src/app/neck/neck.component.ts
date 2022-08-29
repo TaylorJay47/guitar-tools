@@ -22,9 +22,6 @@ export class NeckComponent implements OnInit, DoCheck {
   constructor(private noteToggleService: NoteToggleService) {}
 
   ngOnInit(): void {
-    if (this.mode === 'scales'){
-      this.updateKey()
-    }
     setTimeout(() => {
       for (let note of Music.notes['E']){
         let counter = 1
@@ -76,21 +73,6 @@ export class NeckComponent implements OnInit, DoCheck {
 
   updateTuning() {
     this.tuning = Music.tunings[this.tune].tuning;
-  }
-
-  updateKey() {
-    setTimeout(() => {
-      this.noteToggleService.disableAll()
-    }, 100)
-    this.noteToggleService.enabled = []
-    for (let int of Music.quality[this.quality].scaleIntervals) {
-      this.noteToggleService.enabled.push(Music.notes[this.key][int])
-    }
-    for (let note of this.noteToggleService.enabled){
-      setTimeout(() => {
-        this.noteToggleService.toggle(note)
-      }, 350)
-    }
   }
 
   toggleNote(note: string){

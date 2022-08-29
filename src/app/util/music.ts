@@ -9,8 +9,32 @@ export class Music {
     'Minor': {
       name: 'Minor',
       regex: /([A-G][#b]?(m))|([A-G][#b]?(min))/,
-      scaleIntervals: [0, 2, 3, 5, 7, 8, 10],
-      chordIntervals: [0, 3, 7] //Root, Minor(flat) 3rd, Perfect 5th
+      scaleIntervals: [0, 2, 3.1, 5, 7, 8.1, 10.1],
+      chordIntervals: [0, 3.1, 7] //Root, Minor(flat) 3rd, Perfect 5th
+    },
+    'Melodic Minor': {
+      name: 'Melodic Minor',
+      scaleIntervals: [0, 2, 3.1, 5, 7, 9, 11],
+    },
+    'Harmonic Minor': {
+      name: 'Harmonic Minor',
+      scaleIntervals: [0, 2, 3.1, 5, 7, 8.1, 11],
+    },
+    'Major Pentatonic': {
+      name: 'Major Pentatonic',
+      scaleIntervals: [0, 2, 4, 7, 9],
+    },
+    'Minor Pentatonic': {
+      name: 'Minor Pentatonic',
+      scaleIntervals: [0, 3.1, 5, 7, 10.1],
+    },
+    'Minor Pentatonic Blues': {
+      name: 'Minor Pentatonic Blues',
+      scaleIntervals: [0, 3.1, 5, 6.1, 7, 9.1],
+    },
+    'Major Pentatonic Blues': {
+      name: 'Major Pentatonic Blues',
+      scaleIntervals: [0, 2, 3.1, 4, 7, 9],
     },
     'Fifth': {
       name: 'Fifth',
@@ -25,7 +49,7 @@ export class Music {
     'Minor Sixth': {
       name: 'Minor Sixth',
       regex: /([A-G][#b]?m6)|([A-G][#b]?min6)/,
-      chordIntervals: [0, 3, 7, 9] //Root, Minor 3rd, Perfect 5th, Major 6th
+      chordIntervals: [0, 3.1, 7, 9] //Root, Minor 3rd, Perfect 5th, Major 6th
     },
     'Sixth Ninth': {
       name: 'Sixth Ninth',
@@ -35,7 +59,7 @@ export class Music {
     'Seventh': {
       name: 'Seventh',
       regex: /([A-G][#b]?(7))/,
-      chordIntervals: [0, 4, 7, 10] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th
+      chordIntervals: [0, 4, 7, 10.1] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th
     },
     'Major Seventh': {
       name: 'Major Seventh',
@@ -45,27 +69,27 @@ export class Music {
     'Minor Seventh': {
       name: 'Minor Seventh',
       regex: /([A-G][#b]?m7)|([A-G][#b]?min7)/,
-      chordIntervals: [0, 3, 7, 10] //Root, Minor(flat) 3rd, Perfect 5th, Minor(flat) 7th
+      chordIntervals: [0, 3.1, 7, 10.1] //Root, Minor(flat) 3rd, Perfect 5th, Minor(flat) 7th
     },
     'Minor Major Seventh': {
       name: 'Minor Major Seventh',
       regex: /([A-G][#b]?mM7)|([A-G][#b]?minmaj)|([A-G][#b]?m\(M7\))/,
-      chordIntervals: [0, 3, 7, 11] //Root, Minor(flat) 3rd, Perfect 5th, Major 7th
+      chordIntervals: [0, 3.1, 7, 11] //Root, Minor(flat) 3rd, Perfect 5th, Major 7th
     },
     'Half-diminished': {
       name: 'Half-diminished',
       regex: /([A-G][#b]?m7b5)|([A-G][#b]?ø)/,
-      chordIntervals: [0, 3, 6, 10] //Root, Minor 3rd, Flat 5th, Minor 7th
+      chordIntervals: [0, 3, 6, 10.1] //Root, Minor 3rd, Flat 5th, Minor 7th
     },
     'Ninth': {
       name: 'Ninth',
       regex: /([A-G][#b]?9)/,
-      chordIntervals: [0, 4, 7, 10, 2] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2 in notes array)
+      chordIntervals: [0, 4, 7, 10.1, 2] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2 in notes array)
     },
     'Minor Ninth': {
       name: 'Minor Ninth',
       regex: /([A-G][#b]?m9)|([A-G][#b]?min9)/,
-      chordIntervals: [0, 3, 7, 10, 2] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th
+      chordIntervals: [0, 3.1, 7, 10.1, 2] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th
     },
     'Major Ninth': {
       name: 'Manor Ninth',
@@ -75,37 +99,37 @@ export class Music {
     'Eleventh': {
       name: 'Eleventh',
       regex: /([A-G][#b]?11)/,
-      chordIntervals: [0, 4, 7, 10, 2, 5] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 5)
+      chordIntervals: [0, 4, 7, 10.1, 2, 5] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 5)
     },
     'Minor Eleventh': {
       name: 'Minor Eleventh',
       regex: /([A-G][#b]?m11)|([A-G][#b]?min11)/,
-      chordIntervals: [0, 3, 7, 10, 2, 5] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th, Major 11th
+      chordIntervals: [0, 3, 7, 10.1, 2, 5] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th, Major 11th
     },
     'Thirteenth': {
       name: 'Thirteenth',
       regex: /([A-G][#b]?13)/,
-      chordIntervals: [0, 4, 7, 10, 2, 5, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 4), Major 13th (index 6)
+      chordIntervals: [0, 4, 7, 10.1, 2, 5, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 4), Major 13th (index 6)
     },
     'Minor Thirteenth': {
       name: 'Minor Thirteenth',
       regex: /([A-G][#b]?m13)|([A-G][#b]?min13)/,
-      chordIntervals: [0, 3, 7, 10, 2, 5, 9] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th, Major 11th, Major 13th
+      chordIntervals: [0, 3.1, 7, 10.1, 2, 5, 9] //Root, Minor 3rd, Perfect 5th, Minor 7th, Major 9th, Major 11th, Major 13th
     },
     'Major Thirteenth': {
       name: 'Major Thirteenth',
       regex: /([A-G][#b]?maj13)/,
-      chordIntervals: [0, 4, 7, 11, 2, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 13th
+      chordIntervals: [0, 4, 7, 11.1, 2, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 13th
     },
     'Diminished': {
       name: 'Diminished',
       regex: /([A-G][#b]?dim)|([A-G][#b]?°)/,
-      chordIntervals: [0, 3, 6] //Root, Minor 3rd, Flat 5th
+      chordIntervals: [0, 3.1, 6] //Root, Minor 3rd, Flat 5th
     },
     'Diminished 7': {
       name: 'Diminished 7',
       regex: /([A-G][#b]?dim7)|([A-G][#b]?°7)/,
-      chordIntervals: [0, 3, 6, 9] //Root, Minor 3rd, Flat 5th, added Minor 3rd
+      chordIntervals: [0, 3.1, 6, 9.1] //Root, Minor 3rd, Flat 5th, added Minor 3rd
     },
     'Augmented': {
       name: 'Augmented',
@@ -115,7 +139,7 @@ export class Music {
     'Augmented 7': {
       name: 'Augmented 7',
       regex: /(([A-G][#b]?aug7)|([A-G][#b]?7\+5)|([A-G][#b]?7#5)|([A-G][#b]?\+7))/,
-      chordIntervals: [0, 4, 8, 10] //Root, Major 3rd, Augmented 5th, Minor 7th
+      chordIntervals: [0, 4, 8, 10.1] //Root, Major 3rd, Augmented 5th, Minor 7th
     },
     'Add 9': {
       name: 'Add 9',
@@ -150,7 +174,7 @@ export class Music {
     'Seven Minus 5': {
       name: 'Seven Minus 5',
       regex: /([A-G][#b]?(7-5))|([A-G][#b]?(7b5))/,
-      chordIntervals: [0, 4, 6, 10] //Root, Major 3rd, Flat 5th, Minor(flat) 7th
+      chordIntervals: [0, 4, 6.1, 10.1] //Root, Major 3rd, Flat 5th, Minor(flat) 7th
     }
   }
 
@@ -158,15 +182,20 @@ export class Music {
     'E': ['E','F','F#','G','G#','A','A#','B','C','C#','D','D#','E'],
     'A': ['A','A#','B','C','C#','D','D#','E','F','F#','G','G#','A'],
     'A#': ['A#','B','C','C#','D','D#','E','F','F#','G','G#',"A",'A#'],
+    'Bb': ['A#','B','C','C#','D','D#','E','F','F#','G','G#',"A",'A#'],
     'D': ['D','D#','E','F','F#','G','G#','A','A#','B','C','C#','D'],
     'D#': ['D#','E','F','F#','G','G#','A','A#','B','C','C#','D','D#'],
+    'Eb': ['D#','E','F','F#','G','G#','A','A#','B','C','C#','D','D#'],
     'G': ['G','G#','A','A#','B','C','C#','D','D#','E','F','F#','G'],
     'G#': ['G#','A','A#','B','C','C#','D','D#','E','F','F#','G','G#'],
+    'Ab': ['G#','A','A#','B','C','C#','D','D#','E','F','F#','G','G#'],
     'B': ['B','C','C#','D','D#','E','F','F#','G','G#','A','A#','B'],
     'C': ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B','C'],
     'C#': ['C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#'],
+    'Db': ['C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#'],
     'F': ['F','F#','G','G#','A','A#','B','C','C#','D','D#','E','F'],
-    'F#': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#']
+    'F#': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#'],
+    'Gb': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#']
   }
 
   static tunings = {
