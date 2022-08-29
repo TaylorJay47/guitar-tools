@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Injectable } from '@angular/core';
 import { Music } from '../util/music';
 
@@ -12,7 +13,7 @@ export class ChordDecoderService {
     let intervals: number[] = [];
     // @ts-ignore
     Object.entries(Music.quality).map(([key, val]) => {
-      if (val.regex.test(chord)){
+      if (val.regex?.test(chord)){
         quality = val.name;
         intervals = val.chordIntervals;
       }
