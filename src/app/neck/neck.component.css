@@ -34,12 +34,12 @@
 .strings {
   position: absolute;
   left: -32px;
-  top: 2px;
+  top: 0px;
   z-index: 3;
 }
 
 .strings li {
-  margin-top: 25px ;
+  margin-top: 26px ;
   margin-bottom: 6px;
   display: inline-block;
   width: 930px;
@@ -63,8 +63,9 @@
 .notes li {
   cursor: pointer;
   text-align: center;
-  padding-top: 1px;
+  padding-top: 2px;
   color: white;
+  font-size: 14px;
   display: inline-block;
   background-color: dodgerblue;
   margin-bottom: -1px;

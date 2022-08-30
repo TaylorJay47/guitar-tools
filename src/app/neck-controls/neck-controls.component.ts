@@ -72,9 +72,7 @@ export class NeckControlsComponent implements OnInit {
       }
       this.submitEvent.emit()
 
-      setTimeout(() => {
-        this.noteToggleService.disableAll()
-      }, 100)
+      this.noteToggleService.disableAll()
       this.noteToggleService.enabled = []
       for (let int of Music.quality[this.quality].scaleIntervals) {
         let note = Music.notes[this.key][Math.floor(int)]
@@ -82,20 +80,24 @@ export class NeckControlsComponent implements OnInit {
         setTimeout(() => {
           if (int.toString().length > 2 && note.length === 2) {
             let noteCheck = Music.notes['E'][Music.notes['E'].indexOf(note) - 2]
-            if ($("li:contains(" + noteCheck + ")").css('opacity') > '0.15') {
+            if ($("li:contains('" + noteCheck + "')").css('opacity') > '0.15') {
               this.noteToggleService.flatten(note)
-            } else if ($("li:contains(" + note.charAt(0) + "b)").css('opacity') > '0.15') {
+            } else if ($("li:contains('" + note.charAt(0) + "b')").css('opacity') > '0.15') {
               this.noteToggleService.flatten(note)
-            } else if ($("li:contains(" + note.charAt(0) + ")").css('opacity') > '0.15') {
+            } else if ($("li:contains('" + note.charAt(0) + "')").css('opacity') > '0.15') {
               this.noteToggleService.flatten(note)
             }
           }
+          for (let note of this.noteToggleService.enabled){
+            this.noteToggleService.toggle(note)
+          }
         }, 250)
-      }
-      for (let note of this.noteToggleService.enabled){
+        // Because a note can be flattened in the previous step, it needs to be checked again shortly after
         setTimeout(() => {
-          this.noteToggleService.toggle(note)
-        }, 350)
+          if ($("li:contains('" + note.charAt(0) + "b')").css('opacity') > '0.15') {
+            this.noteToggleService.flatten(note)
+          }
+        }, 425)
       }
 
     } else if (this.mode === 'chords'){
@@ -132,7 +134,7 @@ export class NeckControlsComponent implements OnInit {
       for (let note of this.noteToggleService.enabled){
         setTimeout(() => {
           this.noteToggleService.toggle(note)
-        }, 350)
+        }, 425)
       }
     }
   }
