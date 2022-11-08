@@ -47,6 +47,47 @@ export class NeckControlsComponent implements OnInit {
     chordControl: new FormControl('')
   });
 
+  flatten(interval: number, note: string) {
+    if (this.noteToggleService.enabled.includes(note.charAt(0))) {
+      this.noteToggleService.flatten(note);
+    }
+    if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
+      if (interval.toString().length !== 1 && note.length === 2) {
+        this.noteToggleService.flatten(note);
+      } else if (Music.quality[this.quality].minor) {
+        this.noteToggleService.flatten(note);
+      }
+    }
+  }
+
+  toggleNotes() {
+    for (let note of this.noteToggleService.enabled){
+      setTimeout(() => {
+        this.noteToggleService.toggle(note)
+      }, 300)
+    }
+  }
+
+  flattenAndToggle(page: string) {
+    for (let note of this.noteToggleService.enabled) {
+      setTimeout(() => {
+        if (this.key.charAt(1) !== '#') {
+          switch (page) {
+            case 'scales':
+              for (let int of Music.quality[this.quality].scaleIntervals) {
+                this.flatten(int, note);
+              }
+            case 'chords':
+              for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
+                this.flatten(int, note);
+              }
+          }
+        }
+      }, 250)
+    }
+    this.toggleNotes()
+  }
+
   onSubmit() {
     this.noteToggleService.disableAll()
     setTimeout(() => {
@@ -54,7 +95,7 @@ export class NeckControlsComponent implements OnInit {
     }, 225)
     this.noteToggleService.enabled = []
 
-    if (this.mode === 'scales'){
+    if (this.mode === 'scales') {
       if (this.tune !== this.oldTune) {
         if (this.tune) {
           this.tuneChange.emit(this.tune)
@@ -79,29 +120,9 @@ export class NeckControlsComponent implements OnInit {
         this.noteToggleService.enabled.push(note)
       }
 
-      for (let note of this.noteToggleService.enabled) {
-        setTimeout(() => {
-          if (this.key.charAt(1) !== '#') {
-            for (let int of Music.quality[this.quality].scaleIntervals) {
-              if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
-                if (int.toString().length > 2 && note.length === 2) {
-                  this.noteToggleService.flatten(note);
-                } else if (Music.quality[this.quality].minor) {
-                  this.noteToggleService.flatten(note);
-                }
-              }
-            }
-          }
-        }, 250)
-      }
+      this.flattenAndToggle(this.mode)
 
-      setTimeout(() => {
-        for (let note of this.noteToggleService.enabled){
-          this.noteToggleService.toggle(note)
-        }
-      }, 300)
-
-    } else if (this.mode === 'chords'){
+    } else if (this.mode === 'chords') {
       if (this.tune !== this.oldTune) {
         if (this.tune) {
           this.tuneChange.emit(this.tune)
@@ -109,29 +130,12 @@ export class NeckControlsComponent implements OnInit {
         }
       }
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
-        let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ? this.chord.substring(0,2) : this.chord.charAt(0)][Math.floor(int)]
+        let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ?
+          this.chord.substring(0, 2) : this.chord.charAt(0)][Math.floor(int)]
         this.noteToggleService.enabled.push(note)
       }
-      for (let note of this.noteToggleService.enabled) {
-        setTimeout(() => {
-          if (this.chord.charAt(1) !== '#') {
-            for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
-              if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
-                if (int.toString().length > 2 && note.length === 2) {
-                  this.noteToggleService.flatten(note);
-                } else if (Music.quality[this.quality].minor) {
-                  this.noteToggleService.flatten(note);
-                }
-              }
-            }
-          }
-        }, 250)
-      }
-      for (let note of this.noteToggleService.enabled){
-        setTimeout(() => {
-          this.noteToggleService.toggle(note)
-        }, 300)
-      }
+
+      this.flattenAndToggle(this.mode)
     }
   }
 
