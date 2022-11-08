@@ -63,7 +63,7 @@
 .notes li {
   cursor: pointer;
   text-align: center;
-  padding-top: 2px;
+  padding-top: 1px;
   color: white;
   font-size: 14px;
   display: inline-block;
