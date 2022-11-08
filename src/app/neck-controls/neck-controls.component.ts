@@ -48,10 +48,13 @@ export class NeckControlsComponent implements OnInit {
   });
 
   onSubmit() {
+    this.noteToggleService.disableAll()
+    setTimeout(() => {
+      this.noteToggleService.resetQuality()
+    }, 225)
+    this.noteToggleService.enabled = []
+
     if (this.mode === 'scales'){
-      setTimeout(() => {
-        this.noteToggleService.resetQuality()
-      }, 100)
       if (this.tune !== this.oldTune) {
         if (this.tune) {
           this.tuneChange.emit(this.tune)
@@ -71,34 +74,32 @@ export class NeckControlsComponent implements OnInit {
         }
       }
       this.submitEvent.emit()
-
-      this.noteToggleService.disableAll()
-      this.noteToggleService.enabled = []
       for (let int of Music.quality[this.quality].scaleIntervals) {
         let note = Music.notes[this.key][Math.floor(int)]
         this.noteToggleService.enabled.push(note)
+      }
+
+      for (let note of this.noteToggleService.enabled) {
         setTimeout(() => {
-          if (int.toString().length > 2 && note.length === 2) {
-            let noteCheck = Music.notes['E'][Music.notes['E'].indexOf(note) - 2]
-            if ($("li:contains('" + noteCheck + "')").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
-            } else if ($("li:contains('" + note.charAt(0) + "b')").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
-            } else if ($("li:contains('" + note.charAt(0) + "')").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
+          if (this.key.charAt(1) !== '#') {
+            for (let int of Music.quality[this.quality].scaleIntervals) {
+              if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
+                if (int.toString().length > 2 && note.length === 2) {
+                  this.noteToggleService.flatten(note);
+                } else if (Music.quality[this.quality].minor) {
+                  this.noteToggleService.flatten(note);
+                }
+              }
             }
           }
-          for (let note of this.noteToggleService.enabled){
-            this.noteToggleService.toggle(note)
-          }
         }, 250)
-        // Because a note can be flattened in the previous step, it needs to be checked again shortly after
-        setTimeout(() => {
-          if ($("li:contains('" + note.charAt(0) + "b')").css('opacity') > '0.15') {
-            this.noteToggleService.flatten(note)
-          }
-        }, 425)
       }
+
+      setTimeout(() => {
+        for (let note of this.noteToggleService.enabled){
+          this.noteToggleService.toggle(note)
+        }
+      }, 300)
 
     } else if (this.mode === 'chords'){
       if (this.tune !== this.oldTune) {
@@ -107,34 +108,29 @@ export class NeckControlsComponent implements OnInit {
           this.oldTune = this.tune;
         }
       }
-
-      setTimeout(() => {
-        this.noteToggleService.disableAll()
-        this.noteToggleService.resetQuality()
-      }, 100)
-      this.noteToggleService.enabled = []
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
         let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ? this.chord.substring(0,2) : this.chord.charAt(0)][Math.floor(int)]
         this.noteToggleService.enabled.push(note)
+      }
+      for (let note of this.noteToggleService.enabled) {
         setTimeout(() => {
-          if (int.toString().length > 2 && note.length === 2) {
-            let noteCheck = Music.notes['E'][Music.notes['E'].indexOf(note) - 2]
-            if ($("li:contains(" + noteCheck + ")").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
-            } else if ($("li:contains(" + note.charAt(0) + "b)").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
-            } else if ($("li:contains(" + note.charAt(0) + ")").css('opacity') > '0.15') {
-              this.noteToggleService.flatten(note)
+          if (this.chord.charAt(1) !== '#') {
+            for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
+              if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
+                if (int.toString().length > 2 && note.length === 2) {
+                  this.noteToggleService.flatten(note);
+                } else if (Music.quality[this.quality].minor) {
+                  this.noteToggleService.flatten(note);
+                }
+              }
             }
-          } else if (this.chord.charAt(1) === 'b' && note.length === 2) {
-            this.noteToggleService.flatten(note)
           }
         }, 250)
       }
       for (let note of this.noteToggleService.enabled){
         setTimeout(() => {
           this.noteToggleService.toggle(note)
-        }, 425)
+        }, 300)
       }
     }
   }

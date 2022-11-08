@@ -13,6 +13,7 @@ import { NeckComponent } from './neck/neck.component';
 import { NeckControlsComponent } from "./neck-controls/neck-controls.component";
 import { NoteDirective } from './directives/note-hover.directive';
 import * as $ from 'jquery';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import * as $ from 'jquery';
     HomeComponent,
     NeckComponent,
     NeckControlsComponent,
-    NoteDirective
+    NoteDirective,
+    FooterComponent
   ],
     imports: [
         BrowserModule,
