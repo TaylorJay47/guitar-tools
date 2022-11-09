@@ -53,7 +53,6 @@ export class NeckControlsComponent{
     let index = this.noteToggleService.enabled.indexOf(note)
     let intCheck = (this.mode === 'scales') ?
       Music.quality[this.quality].scaleIntervals[index] : Music.quality[this.quality].chordIntervals[index]
-    console.log(note + ' looking in ' + this.noteToggleService.flattened)
     if (this.noteToggleService.enabled.includes(note.charAt(0)) && note !== this.key) {
       this.noteToggleService.flatten(note);
     }
@@ -97,7 +96,9 @@ export class NeckControlsComponent{
       this.intervalsArray.push(Music.intervals[Math.floor(useThis)])
     }
     this.intervals = this.intervalsArray.toString().replace(/,/g, ', ').replace(/\,(?=[^,]*$)/, ' and ')
-    this.notes = this.noteToggleService.flattened.toString().replace(/,/g,', ').replace(/\,(?=[^,]*$)/, ' and ')
+    setTimeout(() => {
+      this.notes = this.noteToggleService.flattened.toString().replace(/,/g, ', ').replace(/\,(?=[^,]*$)/, ' and ')
+    }, 275)
     this.toggleNotes()
   }
 
