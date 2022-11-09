@@ -7,6 +7,7 @@ import { Music } from '../util/music';
 })
 export class NoteToggleService {
   enabled: string[] = []
+  flattened: string[] = []
 
   constructor() { }
 
@@ -16,6 +17,16 @@ export class NoteToggleService {
         $('.' + note.charAt(0) + '\\#').css('opacity', '15%');
       } else {
         $('.' + note).css('opacity', '15%');
+      }
+    }
+  }
+
+  enableAll() {
+    for (let note of Music.notes['E']) {
+      if (note.length === 2) {
+        $('.' + note.charAt(0) + '\\#').css('opacity', '');
+      } else {
+        $('.' + note).css('opacity', '');
       }
     }
   }
@@ -51,6 +62,9 @@ export class NoteToggleService {
     let noteEl = $('.' + note.charAt(0) + '\\#')
     let nextNote = Music.notes['E'][Music.notes['E'].indexOf(note) + 1]
     noteEl.text(noteEl.text().replaceAll(/([A-G][#b]?)/g, nextNote + 'b').substring(0,2))
+    if (note.length > 1) {
+      this.flattened.splice(this.flattened.indexOf(note), 1, nextNote.charAt(0) + 'b')
+    }
   }
 
   sharpen(note: string) {
