@@ -10,14 +10,14 @@
       </div>
       <div>
         <label for="key">Key: </label>
-        <select class="form-control m-sm-2" name="key" formControlName="keyControl" [(ngModel)]="key">
+        <select class="form-control m-sm-2" name="key" formControlName="keyControl" [(ngModel)]="key" (change)="ready = false">
           <option id="key" disabled>Select Key</option>
           <option *ngFor="let key of keys">{{key}}</option>
         </select>
       </div>
       <div>
         <label for="quality">Quality: </label>
-        <select class="form-control m-sm-2" name="quality" formControlName="qualityControl" [(ngModel)]="quality">
+        <select class="form-control m-sm-2" name="quality" formControlName="qualityControl" [(ngModel)]="quality" (change)="ready = false">
           <option id="quality" disabled>Select Quality</option>
           <option *ngFor="let quality of qualities">{{quality}}</option>
         </select>
@@ -33,7 +33,7 @@
       </div>
       <div>
         <label for="chord">Chord: </label>
-        <input class="form-control m-sm-2" type="text" id="chord" name="chord" formControlName="chordControl" [(ngModel)]="chord">
+        <input class="form-control m-sm-2" type="text" id="chord" name="chord" formControlName="chordControl" [(ngModel)]="chord" (change)="ready = false">
       </div>
     </div>
   </div>
@@ -42,3 +42,19 @@
     <button class="btn btn-outline-secondary" (click)="onReset()">Reset</button>
   </div>
 </form>
+<div class="description">
+  <div *ngIf="ready && mode ==='scales'">
+    The {{key}} {{quality}} scale contains the notes {{notes}}. <br>
+    The intervals for the {{quality}} scale are the {{intervals}}.
+  </div>
+  <div *ngIf="ready && mode ==='chords'">
+    The {{chord.charAt(0)}} {{this.chordDecoderService.decodeChord(this.chord).quality}} chord contains the notes {{notes}}. <br>
+    The intervals for the {{this.chordDecoderService.decodeChord(this.chord).quality}} chord are the {{intervals}}.
+  </div>
+  <div *ngIf="!ready && mode === 'scales'">
+    Submit a key and quality to see more information about the selected scale.
+  </div>
+  <div *ngIf="!ready && mode === 'chords'">
+    Submit a chord to see more information about that chord.
+  </div>
+</div>

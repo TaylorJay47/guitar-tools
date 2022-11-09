@@ -7,6 +7,15 @@
   border-radius: 5px;
 }
 
+.description {
+  text-align: center;
+  margin-top: 35px;
+  width: 970px;
+  border: darkgrey 1px solid;
+  border-radius: 5px;
+  padding: 10px;
+}
+
 form div {
   max-width: 930px;
 }

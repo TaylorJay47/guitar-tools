@@ -1,30 +1,30 @@
 export class Music {
   static intervals = {
-    0: 'root',
-    1: 'minor 2nd',
-    2: 'major 2nd',
-    3: 'minor 3rd',
-    4: 'major 3rd',
-    5: 'perfect 4th',
-    6: 'tritone',
-    7: 'perfect 5th',
-    8: 'minor 6th',
-    9: 'major 6th',
-    10: 'minor 7th',
-    11: 'major 7th',
-    12: 'octave',
-    13: 'minor 9th',
-    14: 'major 9th',
-    15: 'minor 10th',
-    16: 'major 10th',
-    17: 'perfect 11th',
-    18: 'augmented 11th',
-    19: 'perfect 12th',
-    20: 'minor 13th',
-    21: 'major 13th',
-    22: 'minor 14th',
-    23: 'major 14th',
-    24: 'double octave'
+    0: 'Root',
+    1: 'Minor 2nd',
+    2: 'Major 2nd',
+    3: 'Minor 3rd',
+    4: 'Major 3rd',
+    5: 'Perfect 4th',
+    6: 'Tritone',
+    7: 'Perfect 5th',
+    8: 'Minor 6th',
+    9: 'Major 6th',
+    10: 'Minor 7th',
+    11: 'Major 7th',
+    12: 'Octave',
+    13: 'Minor 9th',
+    14: 'Major 9th',
+    15: 'Minor 10th',
+    16: 'Major 10th',
+    17: 'Perfect 11th',
+    18: 'Augmented 11th',
+    19: 'Perfect 12th',
+    20: 'Minor 13th',
+    21: 'Major 13th',
+    22: 'Minor 14th',
+    23: 'Major 14th',
+    24: 'Double octave'
   }
 
   static quality = {
@@ -158,7 +158,7 @@ export class Music {
     },
     'Thirteenth': {
       name: 'Thirteenth',
-      minor: false,
+      minor: true,
       regex: /([A-G][#b]?13)/,
       chordIntervals: [0, 4, 7, 10.1, 2, 5, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 4), Major 13th (index 6)
     },
@@ -176,13 +176,13 @@ export class Music {
     },
     'Diminished': {
       name: 'Diminished',
-      minor: false,
+      minor: true,
       regex: /([A-G][#b]?dim)|([A-G][#b]?°)/,
       chordIntervals: [0, 3.1, 6] //Root, Minor 3rd, Flat 5th
     },
     'Diminished 7': {
       name: 'Diminished 7',
-      minor: false,
+      minor: true,
       regex: /([A-G][#b]?dim7)|([A-G][#b]?°7)/,
       chordIntervals: [0, 3.1, 6, 9.1] //Root, Minor 3rd, Flat 5th, added Minor 3rd
     },
