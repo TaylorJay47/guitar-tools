@@ -1,7 +1,7 @@
 .controls {
   display: flex;
   flex-direction: row;
-  margin-top: 300px;
+  margin-top: 50px;
   width: 970px;
   border: darkgrey 1px solid;
   border-radius: 5px;

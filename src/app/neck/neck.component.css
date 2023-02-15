@@ -3,10 +3,8 @@
 }
 
 .neck {
-  position: absolute;
+  position: relative;
   margin-top: 50px;
-  left: 50%;
-  margin-left: -450px;
   height: 263px;
   width: 930px;
   background-color: lightgray;
@@ -15,18 +13,16 @@
 }
 
 .tuning {
-  width: 50px;
-  border-radius: 5px;
   position: absolute;
-  left: -10px;
+  width: 75px;
+  border-radius: 5px;
   background-color: black;
-  z-index: 5;
-
+  z-index: 15;
 }
 
 .tuning li {
   position: relative;
-  left: -150%;
+  left: -40%;
   margin: 17px;
   color: #fff;
 }
@@ -35,7 +31,6 @@
   position: absolute;
   left: -32px;
   top: 0px;
-  z-index: 3;
 }
 
 .strings li {
@@ -49,9 +44,9 @@
 }
 
 .notes {
+  position: absolute;
   top: 15px;
   width: 110%;
-  position: absolute;
   overflow-x: hidden;
   z-index: 5;
 }
@@ -75,14 +70,13 @@
   width: 26px;
   height: 26px;
   border: 2px solid lightgray;
-  transition: .2s;
+  transition: opacity .2s;
 }
 
 .frets {
   position: absolute;
   left: 45px;
   width: 110%;
-  z-index: 1;
 }
 
 .frets li {
@@ -124,9 +118,21 @@
 
 .controls {
   position: absolute;
-  margin-top: 50px;
   left: 50%;
   margin-left: -475px;
   height: 263px;
   width: 900px;
+}
+
+.keyboard-toggle {
+  margin-left: 25px;
+}
+
+.keyboard-container {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.keyboard {
+  margin-top: 25px;
 }

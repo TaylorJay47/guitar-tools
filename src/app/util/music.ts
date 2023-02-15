@@ -64,7 +64,7 @@ export class Music {
     },
     'Minor Pentatonic Blues': {
       name: 'Minor Pentatonic Blues',
-      minor: false,
+      minor: true,
       scaleIntervals: [0, 3.1, 5, 6.1, 7, 10],
     },
     'Major Pentatonic Blues': {
@@ -158,7 +158,7 @@ export class Music {
     },
     'Thirteenth': {
       name: 'Thirteenth',
-      minor: true,
+      minor: false,
       regex: /([A-G][#b]?13)/,
       chordIntervals: [0, 4, 7, 10.1, 2, 5, 9] //Root, Major 3rd, Perfect 5th, Minor(flat) 7th, Major 9th (index 2), Major 11th (index 4), Major 13th (index 6)
     },
@@ -220,7 +220,7 @@ export class Music {
       name: 'Add 4',
       minor: false,
       regex: /([A-G][#b]?add4)/,
-      chordIntervals: [0, 4, 5, 8] //Root, Major 3rd, Perfect 4th, Perfect 5th
+      chordIntervals: [0, 4, 5, 7] //Root, Major 3rd, Perfect 4th, Perfect 5th
     },
     'Suspended 4': {
       name: 'Suspended 4',
@@ -259,7 +259,10 @@ export class Music {
     'Db': ['C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#'],
     'F': ['F','F#','G','G#','A','A#','B','C','C#','D','D#','E','F'],
     'F#': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#'],
-    'Gb': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#']
+    'Gb': ['F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#'],
+    'T': ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+      'C','C#','D','D#','E','F','F#','G','G#','A','A#','B',
+      'C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
   }
 
   static tunings = {

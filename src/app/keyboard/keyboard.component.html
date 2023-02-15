@@ -1,0 +1,3 @@
+<ul>
+  <li *ngFor="let k of keys" [ngClass]="k" appNote [note]="k" (click)="toggleNote(k)"></li>
+</ul>

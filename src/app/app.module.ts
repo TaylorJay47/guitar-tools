@@ -14,6 +14,7 @@ import { NeckControlsComponent } from "./neck-controls/neck-controls.component";
 import { NoteDirective } from './directives/note-hover.directive';
 import * as $ from 'jquery';
 import { FooterComponent } from './footer/footer.component';
+import { KeyboardComponent } from './keyboard/keyboard.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FooterComponent } from './footer/footer.component';
     NeckComponent,
     NeckControlsComponent,
     NoteDirective,
-    FooterComponent
+    FooterComponent,
+    KeyboardComponent
   ],
     imports: [
         BrowserModule,

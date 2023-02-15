@@ -10,7 +10,7 @@
   <div class="notes">
     <div *ngFor="let string of strings" [ngClass]="{string}">
       <ul>
-        <li *ngFor="let note of string" appNote [note]="note" class="{{note}}" (click)="toggleNote(note)">{{note}}</li>
+        <li *ngFor="let note of string" appNote [note]="note" [type]="'note'" class="{{note}}" (click)="toggleNote(note)">{{note}}</li>
       </ul>
     </div>
   </div>
@@ -25,6 +25,14 @@
       <li class="last" *ngFor="let d of [].constructor(2)"></li>
     </ul>
   </ul>
+</div>
+<div class="keyboard-container">
+  <div class="keyboard-toggle">
+    <button class="btn btn-outline-secondary" (click)="toggleKeyboard()">{{showHideKeyboard}} Keyboard</button>
+  </div>
+  <div class="keyboard" *ngIf="keyboardEnabled" >
+    <app-keyboard [mode]="mode"></app-keyboard>
+  </div>
 </div>
 <div class="controls">
   <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"></app-neck-controls>
