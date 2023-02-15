@@ -1,7 +1,8 @@
 // @ts-nocheck
-import {Component, OnInit, Input, DoCheck} from '@angular/core';
+import {Component, OnInit, Input, DoCheck, ViewChild} from '@angular/core';
 import { Music } from '../util/music';
 import {NoteToggleService} from "../services/note-toggle.service";
+import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
 
 @Component({
   selector: 'app-scale-chart',
@@ -10,6 +11,7 @@ import {NoteToggleService} from "../services/note-toggle.service";
 })
 export class NeckComponent implements OnInit, DoCheck {
   @Input() mode: string = 'scales'
+  @ViewChild(NeckControlsComponent) child: NeckControlsComponent
   tune: string = 'Standard';
   key: string = 'C';
   quality: string = 'Major';
@@ -18,32 +20,17 @@ export class NeckComponent implements OnInit, DoCheck {
   oldQuality = 'Major'
   strings = Music.tunings[this.tune].strings;
   tuning = Music.tunings[this.tune].tuning;
+  keyboardEnabled = false
+  showHideKeyboard = 'Show'
 
   constructor(private noteToggleService: NoteToggleService) {}
 
   ngOnInit(): void {
-    setTimeout(() => {
-      for (let note of Music.notes['E']){
-        let counter = 1
-        if (note.length === 2){
-          $('li.' + note.charAt(0) + '\\#').each((index, element) => {
-            $(element).addClass(counter.toString())
-            counter++
-          })
-        } else {
-          $('li.' + note).each((index, element) => {
-            $(element).addClass(counter.toString())
-            counter++
-          })
-        }
-      }
-    }, 500)
   }
 
   ngDoCheck() {
     if (this.tune !== this.oldTune) {
       if (this.tune) {
-        console.log('Tuning changed to ' + this.tune)
         this.updateStrings()
         this.updateTuning()
         this.oldTune = this.tune;
@@ -51,7 +38,6 @@ export class NeckComponent implements OnInit, DoCheck {
     }
     if (this.key !== this.oldKey) {
       if (this.key) {
-        console.log('Key changed to ' + this.key)
         this.updateStrings()
         this.updateTuning()
         this.oldKey = this.key;
@@ -59,11 +45,20 @@ export class NeckComponent implements OnInit, DoCheck {
     }
     if (this.quality !== this.oldQuality) {
       if (this.quality) {
-        console.log('Quality changed to ' + this.quality)
         this.updateStrings()
         this.updateTuning()
         this.oldQuality = this.quality;
       }
+    }
+  }
+
+  toggleKeyboard() {
+    this.keyboardEnabled = !this.keyboardEnabled
+    if (this.keyboardEnabled) {
+      this.child.onSubmit()
+      this.showHideKeyboard = 'Hide'
+    } else {
+      this.showHideKeyboard = 'Show'
     }
   }
 

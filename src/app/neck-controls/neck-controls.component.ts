@@ -53,14 +53,18 @@ export class NeckControlsComponent{
     let index = this.noteToggleService.enabled.indexOf(note)
     let intCheck = (this.mode === 'scales') ?
       Music.quality[this.quality].scaleIntervals[index] : Music.quality[this.quality].chordIntervals[index]
-    if (this.noteToggleService.enabled.includes(note.charAt(0)) && note !== this.key) {
-      this.noteToggleService.flatten(note);
-    }
-    if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
-      if (intCheck < 2 && note.length === 2 && Music.quality[this.quality].minor) {
+    if (this.chord.charAt(1) !== '#') {
+      if (this.noteToggleService.enabled.includes(note.charAt(0)) && note !== this.key) {
         this.noteToggleService.flatten(note);
-      } else if (Music.quality[this.quality].minor) {
+      } else if (this.chord.charAt(1) === 'b' && interval === 0) {
         this.noteToggleService.flatten(note);
+      }
+      if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
+        if (intCheck < 2 && note.length === 2 && Music.quality[this.quality].minor) {
+          this.noteToggleService.flatten(note);
+        } else if (Music.quality[this.quality].minor) {
+          this.noteToggleService.flatten(note);
+        }
       }
     }
   }
@@ -69,8 +73,11 @@ export class NeckControlsComponent{
     for (let note of this.noteToggleService.enabled){
       setTimeout(() => {
         this.noteToggleService.toggle(note)
+        this.noteToggleService.colorKey(note, this.mode === 'scales' ?
+          Music.quality[this.quality].scaleIntervals : Music.quality[this.quality].chordIntervals, this.mode)
       }, 300)
     }
+    this.noteToggleService.octave = 1;
   }
 
   flattenAndToggle(page: string) {
@@ -79,7 +86,7 @@ export class NeckControlsComponent{
       let intCheck = (this.mode === 'scales') ?
         Music.quality[this.quality].scaleIntervals[index] : Music.quality[this.quality].chordIntervals[index]
       setTimeout(() => {
-        if (note.charAt(1) === '#') {
+        if (note.charAt(1) === '#' && this.key.charAt(1) !== '#') {
           this.flatten(intCheck, note);
         }
       }, 250)
@@ -112,10 +119,13 @@ export class NeckControlsComponent{
 
   onSubmit() {
     this.resetVariables()
-    this.noteToggleService.disableAll()
+    this.noteToggleService.resetColors()
+    setTimeout(() => {
+      this.noteToggleService.disableAll()
+    }, 50)
     setTimeout(() => {
       this.noteToggleService.resetQuality()
-    }, 225)
+    }, 175)
     this.noteToggleService.enabled = []
 
     if (this.mode === 'scales') {
@@ -182,7 +192,7 @@ export class NeckControlsComponent{
       this.chord = ''
     }
 
-    this.resetVariables()
+    this.noteToggleService.resetColors()
     this.noteToggleService.enableAll()
     this.noteToggleService.resetQuality()
     this.resetNotes.emit()
