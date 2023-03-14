@@ -115,20 +115,24 @@
   margin-bottom: 60px;
 }
 
+.neck-icon {
+  font-size: 1.5rem;
+  padding-left: 5px;
+  padding-right: 10px
+}
+
+.neck-icon:hover {
+  color: #1E90FF;
+}
 
 .controls {
   position: absolute;
   left: 50%;
   margin-left: -475px;
   height: 263px;
-  width: 900px;
 }
 
-.keyboard-toggle {
-  margin-left: 25px;
-}
-
-.keyboard-container {
+.collapseable-element-container {
   text-align: center;
   margin-top: 25px;
 }

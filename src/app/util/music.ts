@@ -269,17 +269,27 @@ export class Music {
     'Standard': {
       name: 'Standard',
       tuning: ['E', 'B', 'G', 'D', 'A', 'E'],
-      strings: [this.notes['E'], this.notes['B'] ,this.notes['G'], this.notes['D'], this.notes['A'], this.notes['E']]
+      strings: [this.notes['E'], this.notes['B'], this.notes['G'], this.notes['D'], this.notes['A'], this.notes['E']]
     },
     'Drop D': {
       name: 'Drop D',
       tuning: ['E', 'B', 'G', 'D', 'A', 'D'],
-      strings: [this.notes['E'], this.notes['B'] ,this.notes['G'], this.notes['D'], this.notes['A'], this.notes['D']]
+      strings: [this.notes['E'], this.notes['B'], this.notes['G'], this.notes['D'], this.notes['A'], this.notes['D']]
     },
     'Drop C': {
       name: 'Drop C',
       tuning: ['D', 'A', 'F', 'C', 'G', 'C'],
-      strings: [this.notes['D'], this.notes['A'] ,this.notes['F'], this.notes['C'], this.notes['G'], this.notes['C']]
+      strings: [this.notes['D'], this.notes['A'], this.notes['F'], this.notes['C'], this.notes['G'], this.notes['C']]
+    },
+    '8 String Test': {
+      name: '8 String Test',
+      tuning: ['E', 'B', 'G', 'D', 'A', 'E', 'A', 'E'],
+      strings: [this.notes['E'], this.notes['B'], this.notes['G'], this.notes['D'], this.notes['A'], this.notes['E'], this.notes['A'], this.notes['E']]
+    },
+    '4 String Test': {
+      name: '4 String Test',
+      tuning: ['D', 'A', 'F', 'C'],
+      strings: [this.notes['G'], this.notes['D'], this.notes['A'], this.notes['E']]
     }
   }
 }

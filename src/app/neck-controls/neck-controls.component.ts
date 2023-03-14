@@ -33,9 +33,6 @@ export class NeckControlsComponent{
               public noteToggleService: NoteToggleService) {}
 
   keys = Music.notes['C'];
-  tunings = Object.entries(Music.tunings).map(([key, val]) => {
-    return val.name;
-  });
   qualities = Object.entries(Music.quality).map(([key, val]) => {
     if (val.scaleIntervals){
       return val.name;
@@ -43,7 +40,6 @@ export class NeckControlsComponent{
   }).filter(scale => scale);
 
   controlsForm = new FormGroup({
-    tuningControl: new FormControl('Standard'),
     keyControl: new FormControl('C'),
     qualityControl: new FormControl('Major'),
     chordControl: new FormControl('')
@@ -129,12 +125,6 @@ export class NeckControlsComponent{
     this.noteToggleService.enabled = []
 
     if (this.mode === 'scales') {
-      if (this.tune !== this.oldTune) {
-        if (this.tune) {
-          this.tuneChange.emit(this.tune)
-          this.oldTune = this.tune;
-        }
-      }
       if (this.key !== this.oldKey) {
         if (this.key) {
           this.keyChange.emit(this.key)
@@ -157,12 +147,6 @@ export class NeckControlsComponent{
       this.flattenAndToggle(this.mode)
 
     } else if (this.mode === 'chords') {
-      if (this.tune !== this.oldTune) {
-        if (this.tune) {
-          this.tuneChange.emit(this.tune)
-          this.oldTune = this.tune;
-        }
-      }
       this.quality = this.chordDecoderService.decodeChord(this.chord).quality
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
         let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ?
@@ -180,15 +164,11 @@ export class NeckControlsComponent{
 
   onReset() {
     if (this.mode === 'scales') {
-      this.tune = this.oldTune
-      this.tuneChange.emit(this.tune)
       this.key = this.oldKey
       this.keyChange.emit(this.key)
       this.quality = this.oldQuality
       this.qualityChange.emit(this.quality)
     } else if (this.mode === 'chords') {
-      this.tune = this.oldTune
-      this.tuneChange.emit(this.tune)
       this.chord = ''
     }
 

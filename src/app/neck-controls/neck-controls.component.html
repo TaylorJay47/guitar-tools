@@ -2,13 +2,6 @@
   <div class="inputs-row">
     <div *ngIf="mode === 'scales'">
       <div>
-        <label for="scales-tuning">Tuning: </label>
-        <select class="form-control m-sm-2" name="tuning" formControlName="tuningControl" [(ngModel)]="tune" >
-          <option id="scales-tuning" disabled>Select Tuning</option>
-          <option *ngFor="let tuning of tunings">{{tuning}}</option>
-        </select>
-      </div>
-      <div>
         <label for="key">Key: </label>
         <select class="form-control m-sm-2" name="key" formControlName="keyControl" [(ngModel)]="key" (change)="ready = false">
           <option id="key" disabled>Select Key</option>
@@ -24,13 +17,6 @@
       </div>
     </div>
     <div *ngIf="mode === 'chords'">
-      <div>
-        <label for="chords-tuning">Tuning: </label>
-        <select class="form-control m-sm-2" name="tuning" formControlName="tuningControl" [(ngModel)]="tune" >
-          <option id="chords-tuning" disabled>Select Tuning</option>
-          <option *ngFor="let tuning of tunings">{{tuning}}</option>
-        </select>
-      </div>
       <div>
         <label for="chord">Chord: </label>
         <input class="form-control m-sm-2" type="text" id="chord" name="chord" formControlName="chordControl" [(ngModel)]="chord" (change)="ready = false">

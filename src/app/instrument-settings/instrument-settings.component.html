@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="inputs-container">
+    <div class="input-container strings-input">
+      <label for="stringNo">Number of Strings:</label>
+      <input class="form-control m-sm-2" type="number" id="stringNo" name="stringNo" [(ngModel)]="stringNo">
+    </div>
+    <div class="input-container">
+      <input class="form-control m-sm-2" *ngFor="let string of [].constructor(stringNo)" [ngClass]="'string-tuning'" maxlength="2">
+    </div>
+  </div>
+  <div class="buttons-container">
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <button class="btn btn-outline-secondary" (click)="onReset()">Reset</button>
+  </div>
+</div>
