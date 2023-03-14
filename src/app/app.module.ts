@@ -15,6 +15,9 @@ import { NoteDirective } from './directives/note-hover.directive';
 import * as $ from 'jquery';
 import { FooterComponent } from './footer/footer.component';
 import { KeyboardComponent } from './keyboard/keyboard.component';
+import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { InstrumentSettingsComponent } from './instrument-settings/instrument-settings.component';
+import { NeckHelpComponent } from './neck-help/neck-help.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +30,17 @@ import { KeyboardComponent } from './keyboard/keyboard.component';
     NeckControlsComponent,
     NoteDirective,
     FooterComponent,
-    KeyboardComponent
+    KeyboardComponent,
+    InstrumentSettingsComponent,
+    NeckHelpComponent
   ],
     imports: [
         BrowserModule,
         NgbModule,
         AppRoutingModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgbCollapseModule
     ],
   providers: [],
   bootstrap: [AppComponent]
