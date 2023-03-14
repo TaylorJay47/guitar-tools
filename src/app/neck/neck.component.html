@@ -26,15 +26,40 @@
     </ul>
   </ul>
 </div>
-<div class="keyboard-container">
-  <div class="keyboard-toggle">
-    <button class="btn btn-outline-secondary" (click)="toggleKeyboard()">{{showHideKeyboard}} Keyboard</button>
+<i class="bi-question-circle neck-icon"
+   type="button"
+   (click)="help.toggle()"
+   aria-controls="collapseExample"
+   placement="bottom"
+   ngbTooltip="Help"></i>
+<i class="bi-gear-wide-connected neck-icon"
+   type="button"
+   (click)="settings.toggle(); defaultSettings()"
+   aria-controls="collapseExample"
+   placement="bottom"
+   ngbTooltip="Instrument Settings"></i>
+<i class="bi-file-music neck-icon"
+   type="button"
+   (click)="keyboard.toggle(); toggleKeyboard()"
+   aria-controls="collapseExample"
+   placement="bottom"
+   ngbTooltip="Show/Hide Keyboard"></i>
+<div class="collapseable-element-container">
+  <div class="keyboard" #settings="ngbCollapse" [(ngbCollapse)]="isSettingsCollapsed">
+    <app-instrument-settings [mode]="mode" [(tuning)]="tuning" (doUpdate)="child.onSubmit()"></app-instrument-settings>
   </div>
-  <div class="keyboard" *ngIf="keyboardEnabled" >
+</div>
+<div class="collapseable-element-container">
+  <div class="keyboard" #keyboard="ngbCollapse" [(ngbCollapse)]="isKeyboardCollapsed">
     <app-keyboard [mode]="mode"></app-keyboard>
   </div>
 </div>
+<div class="collapseable-element-container">
+  <div class="keyboard" #help="ngbCollapse" [(ngbCollapse)]="isHelpCollapsed">
+    <app-neck-help [mode]="mode"></app-neck-help>
+  </div>
+</div>
 <div class="controls">
-  <app-neck-controls [(tune)]="tune" [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"></app-neck-controls>
+  <app-neck-controls [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"></app-neck-controls>
 </div>
 

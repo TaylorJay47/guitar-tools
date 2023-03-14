@@ -12,16 +12,20 @@ import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
 export class NeckComponent implements OnInit, DoCheck {
   @Input() mode: string = 'scales'
   @ViewChild(NeckControlsComponent) child: NeckControlsComponent
-  tune: string = 'Standard';
   key: string = 'C';
   quality: string = 'Major';
-  oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
-  strings = Music.tunings[this.tune].strings;
-  tuning = Music.tunings[this.tune].tuning;
+  strings: string[] = Music.tunings['Standard'].strings;
+  tuning = ['E', 'B', 'G', 'D', 'A', 'E'];
+  oldTuning = this.tuning;
   keyboardEnabled = false
   showHideKeyboard = 'Show'
+  public isKeyboardCollapsed = true;
+  public isHelpCollapsed = true;
+  public isSettingsCollapsed = true;
+
+
 
   constructor(private noteToggleService: NoteToggleService) {}
 
@@ -29,24 +33,23 @@ export class NeckComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.tune !== this.oldTune) {
-      if (this.tune) {
+    if (this.tuning !== this.oldTuning) {
+      if (this.tuning) {
         this.updateStrings()
-        this.updateTuning()
-        this.oldTune = this.tune;
+        this.oldTuning = this.tuning;
+        setTimeout(() => {
+          $('.neck').css('height', $('.tuning').css('height'))
+          $('.frets li').css('height', $('.tuning').css('height'))
+        }, 10)
       }
     }
     if (this.key !== this.oldKey) {
       if (this.key) {
-        this.updateStrings()
-        this.updateTuning()
         this.oldKey = this.key;
       }
     }
     if (this.quality !== this.oldQuality) {
       if (this.quality) {
-        this.updateStrings()
-        this.updateTuning()
         this.oldQuality = this.quality;
       }
     }
@@ -55,7 +58,6 @@ export class NeckComponent implements OnInit, DoCheck {
   toggleKeyboard() {
     this.keyboardEnabled = !this.keyboardEnabled
     if (this.keyboardEnabled) {
-      this.child.onSubmit()
       this.showHideKeyboard = 'Hide'
     } else {
       this.showHideKeyboard = 'Show'
@@ -63,14 +65,17 @@ export class NeckComponent implements OnInit, DoCheck {
   }
 
   updateStrings() {
-    this.strings = Music.tunings[this.tune].strings;
-  }
-
-  updateTuning() {
-    this.tuning = Music.tunings[this.tune].tuning;
+    this.strings = [];
+    for (let note of this.tuning) {
+      this.strings.push(Music.notes[note]);
+    }
   }
 
   toggleNote(note: string){
     this.noteToggleService.toggle(note);
+  }
+
+  defaultSettings() {
+
   }
 }
