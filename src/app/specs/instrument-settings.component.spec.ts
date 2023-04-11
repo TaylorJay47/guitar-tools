@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InstrumentSettingsComponent } from './instrument-settings.component';
+import { InstrumentSettingsComponent } from '../instrument-settings/instrument-settings.component';
 
 describe('InstrumentSettingsComponent', () => {
   let component: InstrumentSettingsComponent;
