@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NeckHelpComponent } from './neck-help.component';
+import { KeyboardComponent } from '../keyboard/keyboard.component';
 
-describe('NeckHelpComponent', () => {
-  let component: NeckHelpComponent;
-  let fixture: ComponentFixture<NeckHelpComponent>;
+describe('KeyboardComponent', () => {
+  let component: KeyboardComponent;
+  let fixture: ComponentFixture<KeyboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NeckHelpComponent ]
+      declarations: [ KeyboardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NeckHelpComponent);
+    fixture = TestBed.createComponent(KeyboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,7 +5,7 @@ import {NoteToggleService} from "../services/note-toggle.service";
 @Component({
   selector: 'app-keyboard',
   templateUrl: './keyboard.component.html',
-  styleUrls: ['./keyboard.component.css']
+  styleUrls: ['../styles/keyboard.component.scss']
 })
 export class KeyboardComponent implements OnInit {
   @Input() mode: string = 'scales';

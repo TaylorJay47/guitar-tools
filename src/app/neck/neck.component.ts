@@ -7,7 +7,7 @@ import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
 @Component({
   selector: 'app-scale-chart',
   templateUrl: './neck.component.html',
-  styleUrls: ['./neck.component.css']
+  styleUrls: ['../styles/neck.component.scss']
 })
 export class NeckComponent implements OnInit, DoCheck {
   @Input() mode: string = 'scales'

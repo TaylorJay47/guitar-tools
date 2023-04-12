@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NoteToggleService } from './note-toggle.service';
+import { NoteToggleService } from '../services/note-toggle.service';
 
 describe('NoteToggleService', () => {
   let service: NoteToggleService;

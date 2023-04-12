@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NeckComponent } from './neck.component';
+import { ChordDecoderComponent } from '../chord-decoder/chord-decoder.component';
 
-describe('ScaleChartComponent', () => {
-  let component: NeckComponent;
-  let fixture: ComponentFixture<NeckComponent>;
+describe('ChordDecoderComponent', () => {
+  let component: ChordDecoderComponent;
+  let fixture: ComponentFixture<ChordDecoderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NeckComponent ]
+      declarations: [ ChordDecoderComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NeckComponent);
+    fixture = TestBed.createComponent(ChordDecoderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
