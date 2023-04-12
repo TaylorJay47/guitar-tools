@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ChordDecoderService } from './chord-decoder.service';
+import { ChordDecoderService } from '../services/chord-decoder.service';
 
 describe('ChordDecoderService', () => {
   let service: ChordDecoderService;

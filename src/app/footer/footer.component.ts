@@ -4,7 +4,7 @@ import { quotes } from '../util/quotes';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['../styles/footer.component.scss']
 })
 export class FooterComponent implements OnInit {
   quote: any;

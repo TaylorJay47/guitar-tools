@@ -4,7 +4,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 @Component({
   selector: 'app-instrument-settings',
   templateUrl: './instrument-settings.component.html',
-  styleUrls: ['./instrument-settings.component.css']
+  styleUrls: ['../styles/instrument-settings.component.scss']
 })
 export class InstrumentSettingsComponent implements OnInit {
   @Input() mode: string = '';

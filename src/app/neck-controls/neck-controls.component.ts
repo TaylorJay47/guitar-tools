@@ -8,7 +8,7 @@ import {NoteToggleService} from "../services/note-toggle.service";
 @Component({
   selector: 'app-neck-controls',
   templateUrl: './neck-controls.component.html',
-  styleUrls: ['./neck-controls.component.css']
+  styleUrls: ['../styles/neck-controls.component.scss']
 })
 export class NeckControlsComponent{
   @Input() mode: string = 'Scales'
