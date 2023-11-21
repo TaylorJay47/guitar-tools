@@ -43,20 +43,32 @@
      ngbTooltip="Help"></i>
   <i class="bi-gear-wide-connected neck-icon"
      type="button"
-     (click)="settings.toggle(); defaultSettings()"
+     (click)="settings.toggle()"
      aria-controls="collapseExample"
      placement="bottom"
      ngbTooltip="Instrument Settings"></i>
   <i class="bi-file-music neck-icon"
      type="button"
-     (click)="keyboard.toggle(); toggleKeyboard()"
+     (click)="keyboard.toggle()"
      aria-controls="collapseExample"
      placement="bottom"
-     ngbTooltip="Show/Hide Keyboard"></i>
+     ngbTooltip="Show/Hide Piano"></i>
+  <i *ngIf="this.mode === 'chords'"
+     class="bi-bar-chart-steps neck-icon"
+     type="button"
+     (click)="chords.toggle()"
+     aria-controls="collapseExample"
+     placement="bottom"
+     ngbTooltip="Chord Progression"></i>
 </div>
 <div class="collapseable-element-container">
   <div class="keyboard" #settings="ngbCollapse" [(ngbCollapse)]="isSettingsCollapsed">
     <app-instrument-settings [mode]="mode" [(tuning)]="tuning" (doUpdate)="child.onSubmit()"></app-instrument-settings>
+  </div>
+</div>
+<div class="collapseable-element-container">
+  <div class="keyboard" #chords="ngbCollapse" [(ngbCollapse)]="isChordsCollapsed">
+    <app-chord-progression (getChord)="sendChord()" (setChordEvent)="setChord($event)"></app-chord-progression>
   </div>
 </div>
 <div class="collapseable-element-container">

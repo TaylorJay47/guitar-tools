@@ -3,6 +3,7 @@
   display: flex;
   border: darkgrey 1px solid;
   border-radius: 5px;
+  max-width: 930px;
 }
 
 .form-control {
@@ -21,7 +22,7 @@
   flex-basis: 100%;
   flex-wrap: wrap;
   @media screen and (max-width: 1000px) {
-    padding-top: 10px;
+    padding: 5px 0 10px 0;
   }
 }
 
@@ -34,6 +35,10 @@
 .buttons-container {
   border-left: darkgray 1px solid;
   display: inline-flex;
+  @media screen and (max-width: 1000px) {
+    max-width: 100px;
+    flex-wrap: wrap;
+  }
 }
 
 label {
@@ -52,4 +57,7 @@ button {
   margin: 10px;
   padding: 0 5px 0 5px;
   max-height: 30px ;
+  @media screen and (max-width: 1000px) {
+    width: 75px;
+  }
 }

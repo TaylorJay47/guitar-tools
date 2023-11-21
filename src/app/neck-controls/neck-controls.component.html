@@ -3,7 +3,7 @@
     <div *ngIf="mode === 'scales'">
       <div>
         <label for="key">Key: </label>
-        <select class="form-control m-sm-2" name="key" formControlName="keyControl" [(ngModel)]="key" (change)="ready = false">
+        <select class="form-control m-sm-2 key-control" name="key" formControlName="keyControl" [(ngModel)]="key" (change)="ready = false">
           <option id="key" disabled>Select Key</option>
           <option *ngFor="let key of keys">{{key}}</option>
         </select>
@@ -34,7 +34,7 @@
     The intervals for the {{quality}} scale are the {{intervals}}.
   </div>
   <div *ngIf="ready && mode ==='chords'">
-    The {{chord.charAt(0)}} {{this.chordDecoderService.decodeChord(this.chord).quality}} chord contains the notes {{notes}}. <br>
+    The {{displayChord}} {{this.chordDecoderService.decodeChord(this.chord).quality}} chord contains the notes {{notes}}. <br>
     The intervals for the {{this.chordDecoderService.decodeChord(this.chord).quality}} chord are the {{intervals}}.
   </div>
   <div *ngIf="!ready && mode === 'scales'">

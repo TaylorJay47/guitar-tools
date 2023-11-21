@@ -4,13 +4,14 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Music} from "../util/music";
 import {ChordDecoderService} from "../services/chord-decoder.service";
 import {NoteToggleService} from "../services/note-toggle.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-neck-controls',
   templateUrl: './neck-controls.component.html',
   styleUrls: ['../styles/neck-controls.component.scss']
 })
-export class NeckControlsComponent{
+export class NeckControlsComponent implements OnInit {
   @Input() mode: string = 'Scales'
   @Input() tune: string = 'Standard';
   @Output() tuneChange = new EventEmitter<string>()
@@ -20,7 +21,7 @@ export class NeckControlsComponent{
   @Output() qualityChange = new EventEmitter<string>()
   @Output() submitEvent = new EventEmitter<any>()
   @Output() resetNotes = new EventEmitter<any>()
-  chord = ''
+  chord = 'C'
   oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
@@ -28,9 +29,12 @@ export class NeckControlsComponent{
   intervalsArray = []
   intervals = ''
   notes = ''
+  currentChord = '';
+  displayChord = '';
 
   constructor(public chordDecoderService: ChordDecoderService,
-              public noteToggleService: NoteToggleService) {}
+              public noteToggleService: NoteToggleService,
+              private route: ActivatedRoute) {}
 
   keys = Music.notes['C'];
   qualities = Object.entries(Music.quality).map(([key, val]) => {
@@ -45,6 +49,42 @@ export class NeckControlsComponent{
     chordControl: new FormControl('')
   });
 
+  ngOnInit() {
+    let temp = this.route.snapshot.paramMap.get('param');
+    switch (this.mode) {
+      case 'scales':
+        let tempScale = this.route.snapshot.paramMap.get('scale');
+        if (tempScale) {
+          tempScale = tempScale?.replace(/sharp|Sharp/, '#').replace(/flat|Flat/, 'b');
+          let isSharp = tempScale?.includes('#');
+          let isFlat = tempScale?.includes('b');
+          if (isSharp || isFlat) {
+            setTimeout(() => {
+              this.controlsForm.controls.keyControl.setValue(tempScale?.substring(0,2));
+              this.controlsForm.controls.qualityControl.setValue(tempScale?.substring(2));
+            }, 5);
+            console.log(this.controlsForm.controls.qualityControl.value);
+            this.key = tempScale?.substring(0,2);
+            this.quality = tempScale?.substring(2);
+            console.log(this.quality);
+          } else {
+            setTimeout(() => {
+              this.controlsForm.controls.keyControl.setValue(tempScale?.charAt(0));
+              this.controlsForm.controls.qualityControl.setValue(tempScale?.substring(1).replace(/(?!^)[A-Z]/g, letter => ` ${letter}`));
+            }, 5);
+            console.log(this.controlsForm.controls.qualityControl.value);
+            this.key = tempScale?.charAt(0);
+            this.quality = tempScale?.substring(1).replace(/(?!^)[A-Z]/g, letter => ` ${letter}`);
+          }
+        }
+      case 'chords':
+        const tempChord = this.route.snapshot.paramMap.get('chord');
+        if (tempChord) {
+          this.chord = tempChord?.replace(/sharp|Sharp/, '#').replace(/flat|Flat/, 'b');
+        }
+    }
+  }
+
   flatten(interval: number, note: string) {
     let index = this.noteToggleService.enabled.indexOf(note)
     let intCheck = (this.mode === 'scales') ?
@@ -52,7 +92,7 @@ export class NeckControlsComponent{
     if (this.chord.charAt(1) !== '#') {
       if (this.noteToggleService.enabled.includes(note.charAt(0)) && note !== this.key) {
         this.noteToggleService.flatten(note);
-      } else if (this.chord.charAt(1) === 'b' && interval === 0) {
+      } else if (this.chord.charAt(1) === 'b') {
         this.noteToggleService.flatten(note);
       }
       if (!this.noteToggleService.enabled.includes(note.charAt(0))) {
@@ -146,7 +186,7 @@ export class NeckControlsComponent{
 
       this.flattenAndToggle(this.mode)
 
-    } else if (this.mode === 'chords') {
+    } else if (this.mode === 'chords' && this.chord) {
       this.quality = this.chordDecoderService.decodeChord(this.chord).quality
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
         let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ?
@@ -154,12 +194,17 @@ export class NeckControlsComponent{
         this.noteToggleService.enabled.push(note)
         this.noteToggleService.flattened.push(note)
       }
-
       this.flattenAndToggle(this.mode)
+      setTimeout(() => {
+        if (this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b') {
+          this.displayChord = this.chord.substring(0,2);
+        } else {
+          this.displayChord = this.chord.charAt(0);
+        }
+        this.currentChord = this.chord;
+        this.ready = true;
+      }, 250)
     }
-    setTimeout(() => {
-      this.ready = true;
-    }, 250)
   }
 
   onReset() {
