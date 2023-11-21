@@ -20,6 +20,15 @@
   display: inline-flex;
   flex-basis: 100%;
   flex-wrap: wrap;
+  @media screen and (max-width: 1000px) {
+    padding-top: 10px;
+  }
+}
+
+.strings-text-input {
+  @media screen and (max-width: 1000px) {
+    margin: 7px 5px 0 0 !important;
+  }
 }
 
 .buttons-container {
@@ -34,6 +43,9 @@ label {
 input {
   height: 30px;
   width: 60px;
+  @media screen and (max-width: 1000px) {
+    margin: 5px !important;
+  }
 }
 
 button {

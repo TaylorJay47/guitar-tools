@@ -4,28 +4,34 @@
       <li *ngFor="let string of strings"></li>
     </ul>
 
+    <ul class="fret-numbers">
+      <li class="fret-number" *ngFor="let f of frets">{{f}}</li>
+    </ul>
+
     <ul class="tuning">
       <li *ngFor="let tuning of tuning" class="{{tuning}}">{{tuning}}</li>
     </ul>
 
-    <div class="notes">
-      <div *ngFor="let string of strings" [ngClass]="{string}">
-        <ul>
-          <li *ngFor="let note of string" appNote [note]="note" [type]="'note'" class="{{note}}" (click)="toggleNote(note)">{{note}}</li>
-        </ul>
+    <div class="neck-half-{{half}}" *ngFor="let half of [1,2]">
+      <div class="notes">
+        <div *ngFor="let string of strings" [ngClass]="{string}">
+          <ul>
+            <li *ngFor="let note of string" appNote [note]="note" [type]="'note'" class="{{note}}" (click)="toggleNote(note)">{{note}}</li>
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <ul class="frets">
-      <li *ngFor="let f of [].constructor(12)"></li>
-    </ul>
-
-    <ul class="dots">
-      <li class="first" *ngFor="let d of [].constructor(4)"></li>
-      <ul class="twelve">
-        <li class="last" *ngFor="let d of [].constructor(2)"></li>
+      <ul class="frets">
+        <li *ngFor="let f of [].constructor(12)"></li>
       </ul>
-    </ul>
+
+      <ul class="dots">
+        <li class="first" *ngFor="let d of [].constructor(4)"></li>
+        <ul class="twelve">
+          <li class="last" *ngFor="let d of [].constructor(2)"></li>
+        </ul>
+      </ul>
+    </div>
   </div>
 </div>
 <div class="neck-icons-container">

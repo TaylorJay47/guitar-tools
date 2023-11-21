@@ -43,6 +43,26 @@ export class quotes {
       11: {
         quote: "Guitar is the best for of self-expression I know. Everything else, and I'm just sort of tripping around, trying to figure my way through life.",
         author: "Slash"
+      },
+      12: {
+        quote: "The guitar is a miniature orchestra in itself.",
+        author: "Ludwig van Beethoven"
+      },
+      13: {
+        quote: "I can't play guitar like George Benson, but I can get away with it.",
+        author: "Wesley Willis"
+      },
+      14: {
+        quote: "Every time you pick up your guitar to play, play as if it's the last time.",
+        author: "Eric Clapton"
+      },
+      15: {
+        quote: "When I was growing up, there were two things that were unpopular in my house. One was me, and the other was my guitar",
+        author: "Bruce Springsteen"
+      },
+      16: {
+        quote: "I just go where the guitar takes me.",
+        author: "Angus Young"
       }
   }
 }
