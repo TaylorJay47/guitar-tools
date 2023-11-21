@@ -10,7 +10,7 @@
       </div>
       <div>
         <label for="quality">Quality: </label>
-        <select class="form-control m-sm-2" name="quality" formControlName="qualityControl" [(ngModel)]="quality" (change)="ready = false">
+        <select class="form-control m-sm-2 quality-control" name="quality" formControlName="qualityControl" [(ngModel)]="quality" (change)="ready = false">
           <option id="quality" disabled>Select Quality</option>
           <option *ngFor="let quality of qualities">{{quality}}</option>
         </select>
