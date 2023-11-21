@@ -18,6 +18,7 @@ import { KeyboardComponent } from './keyboard/keyboard.component';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { InstrumentSettingsComponent } from './instrument-settings/instrument-settings.component';
 import { NeckHelpComponent } from './neck-help/neck-help.component';
+import { ChordProgressionComponent } from './chord-progression/chord-progression.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { NeckHelpComponent } from './neck-help/neck-help.component';
     FooterComponent,
     KeyboardComponent,
     InstrumentSettingsComponent,
-    NeckHelpComponent
+    NeckHelpComponent,
+    ChordProgressionComponent
   ],
     imports: [
         BrowserModule,

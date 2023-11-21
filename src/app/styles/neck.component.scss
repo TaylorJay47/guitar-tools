@@ -32,7 +32,7 @@
   position: relative;
   width: 930px;
   float: left;
-  left: -75px;
+  left: -78px;
 }
 
 .tuning {
@@ -118,16 +118,17 @@
 
 .fret-numbers {
   position: absolute;
-  left: 79px;
+  left: 69px;
 }
 
 .fret-number {
+  text-align: center;
   font-weight: bold;
   color: #a1a1a1;
-  width: 26px;
+  width: 30px;
   float: left;
   margin-top: -2px;
-  margin-right: 45px;
+  margin-right: 41px;
 }
 
 .dots {
@@ -196,6 +197,7 @@
 .collapseable-element-container {
   text-align: center;
   margin-top: 25px;
+  max-width: 930px;
 
   @media screen and (max-width: 1000px) {
     width: 100vw - 10;

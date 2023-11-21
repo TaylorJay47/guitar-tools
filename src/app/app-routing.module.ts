@@ -5,7 +5,9 @@ import {ChordDecoderComponent} from "./chord-decoder/chord-decoder.component";
 import {HomeComponent} from "./home/home.component";
 
 const routes: Routes =[
+  {path: 'scales/:scale', component: ScalesComponent},
   {path: 'scales', component: ScalesComponent},
+  {path: 'chord-decoder/:chord', component: ChordDecoderComponent},
   {path: 'chord-decoder', component: ChordDecoderComponent},
   {path: '**', component: HomeComponent},
 ];

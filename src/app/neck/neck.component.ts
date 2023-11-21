@@ -3,6 +3,7 @@ import {Component, OnInit, Input, DoCheck, ViewChild} from '@angular/core';
 import { Music } from '../util/music';
 import {NoteToggleService} from "../services/note-toggle.service";
 import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
+import {ChordProgressionComponent} from "../chord-progression/chord-progression.component";
 
 @Component({
   selector: 'app-scale-chart',
@@ -11,7 +12,8 @@ import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
 })
 export class NeckComponent implements OnInit, DoCheck {
   @Input() mode: string = 'scales'
-  @ViewChild(NeckControlsComponent) child: NeckControlsComponent
+  @ViewChild(NeckControlsComponent) child: NeckControlsComponent;
+  @ViewChild(ChordProgressionComponent) chordProgressionComponent: ChordProgressionComponent;
   key: string = 'C';
   quality: string = 'Major';
   oldKey = 'C'
@@ -24,9 +26,8 @@ export class NeckComponent implements OnInit, DoCheck {
   public isKeyboardCollapsed = true;
   public isHelpCollapsed = true;
   public isSettingsCollapsed = true;
+  public isChordsCollapsed = true;
   frets = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
-
-
 
   constructor(private noteToggleService: NoteToggleService) {}
 
@@ -56,15 +57,6 @@ export class NeckComponent implements OnInit, DoCheck {
     }
   }
 
-  toggleKeyboard() {
-    this.keyboardEnabled = !this.keyboardEnabled
-    if (this.keyboardEnabled) {
-      this.showHideKeyboard = 'Hide'
-    } else {
-      this.showHideKeyboard = 'Show'
-    }
-  }
-
   updateStrings() {
     this.strings = [];
     for (let note of this.tuning) {
@@ -76,7 +68,12 @@ export class NeckComponent implements OnInit, DoCheck {
     this.noteToggleService.toggle(note);
   }
 
-  defaultSettings() {
+  sendChord() {
+    this.chordProgressionComponent.chords.push(this.child.chord);
+  }
 
+  setChord(chord: string) {
+    this.child.chord = chord;
+    this.child.onSubmit();
   }
 }
