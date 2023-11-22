@@ -35,7 +35,8 @@
   </div>
 </div>
 <div class="neck-icons-container">
-  <i class="bi-question-circle neck-icon"
+  <i *ngIf="mode === 'chords'"
+     class="bi-question-circle neck-icon"
      type="button"
      (click)="help.toggle()"
      aria-controls="collapseExample"
@@ -59,7 +60,7 @@
      (click)="chords.toggle()"
      aria-controls="collapseExample"
      placement="bottom"
-     ngbTooltip="Chord Progression"></i>
+     ngbTooltip="Show/Hide Chords"></i>
 </div>
 <div class="collapseable-element-container">
   <div class="keyboard" #settings="ngbCollapse" [(ngbCollapse)]="isSettingsCollapsed">
@@ -82,6 +83,8 @@
   </div>
 </div>
 <div class="controls">
-  <app-neck-controls [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"></app-neck-controls>
+  <app-neck-controls [(key)]="key" [(quality)]="quality" (resetNotes)="updateStrings()" [mode]="mode"
+                     (addChord)="chordProgressionComponent.chords.push($event)"
+                     (removeChord)="removeChord($event)"></app-neck-controls>
 </div>
 

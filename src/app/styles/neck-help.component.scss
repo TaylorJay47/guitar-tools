@@ -1,0 +1,13 @@
+.quality-list {
+  width: 930px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  @media screen and (max-width: 1000px) {
+    width: 100vw - 10;
+  }
+}
+
+.quality-list div {
+  flex-basis: 50%;
+  height: 50px;
+}

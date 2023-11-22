@@ -26,7 +26,7 @@ export class NeckComponent implements OnInit, DoCheck {
   public isKeyboardCollapsed = true;
   public isHelpCollapsed = true;
   public isSettingsCollapsed = true;
-  public isChordsCollapsed = true;
+  public isChordsCollapsed = false;
   frets = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 
   constructor(private noteToggleService: NoteToggleService) {}
@@ -75,5 +75,9 @@ export class NeckComponent implements OnInit, DoCheck {
   setChord(chord: string) {
     this.child.chord = chord;
     this.child.onSubmit();
+  }
+
+  removeChord($event: any) {
+    this.chordProgressionComponent.chords.splice(this.chordProgressionComponent.chords.indexOf($event), 1);
   }
 }

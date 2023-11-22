@@ -1,6 +1,5 @@
 <div class="progression-container">
   <div>
-    <button class="add-chord-btn btn btn-primary" (click)="this.addChord()">Add Current Chord</button>
   </div>
   <button class="select-chord-btn btn btn-outline-secondary" *ngFor="let chord of chords; let i = index"
           (click)="setChord(chord)">{{chord}}</button>
