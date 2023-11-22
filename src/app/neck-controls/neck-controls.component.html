@@ -25,6 +25,8 @@
   </div>
   <div class="buttons-row">
     <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    <button class="btn btn-primary" (click)="addToProgression()" *ngIf="mode === 'chords'">Add</button>
+    <button class="btn btn-primary" (click)="removeFromProgression()" *ngIf="mode === 'chords'">Remove</button>
     <button class="btn btn-outline-secondary" (click)="onReset()">Reset</button>
   </div>
 </form>

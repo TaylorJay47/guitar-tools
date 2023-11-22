@@ -41,6 +41,10 @@
   border-radius: 5px;
   background-color: black;
   z-index: 15;
+  @media screen and (max-width: 1000px) {
+    text-align: center;
+    padding-left: 0 !important;
+  }
 }
 
 .tuning li {

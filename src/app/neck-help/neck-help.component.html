@@ -1,1 +1,10 @@
-<p>neck-help works!</p>
+<h3>Supported Chords:</h3>
+<div class="quality-list">
+  <div *ngFor="let quality of qualities; let i = index">
+    <div *ngIf="quality">
+      <div class="full-size">
+        <b>{{quality}}</b> - {{selectors[i]}}
+      </div>
+    </div>
+  </div>
+</div>

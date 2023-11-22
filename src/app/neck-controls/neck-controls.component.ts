@@ -21,11 +21,14 @@ export class NeckControlsComponent implements OnInit {
   @Output() qualityChange = new EventEmitter<string>()
   @Output() submitEvent = new EventEmitter<any>()
   @Output() resetNotes = new EventEmitter<any>()
+  @Output() addChord = new EventEmitter<any>()
+  @Output() removeChord = new EventEmitter<any>()
   chord = 'C'
   oldTune = 'Standard'
   oldKey = 'C'
   oldQuality = 'Major'
   ready = false
+  isLoading = false
   intervalsArray = []
   intervals = ''
   notes = ''
@@ -50,7 +53,6 @@ export class NeckControlsComponent implements OnInit {
   });
 
   ngOnInit() {
-    let temp = this.route.snapshot.paramMap.get('param');
     switch (this.mode) {
       case 'scales':
         let tempScale = this.route.snapshot.paramMap.get('scale');
@@ -154,6 +156,10 @@ export class NeckControlsComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.isLoading) {
+      return;
+    }
+    this.isLoading = true;
     this.resetVariables()
     this.noteToggleService.resetColors()
     setTimeout(() => {
@@ -205,6 +211,9 @@ export class NeckControlsComponent implements OnInit {
         this.ready = true;
       }, 250)
     }
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 500);
   }
 
   onReset() {
@@ -230,5 +239,13 @@ export class NeckControlsComponent implements OnInit {
 
   notReady() {
     this.ready = false;
+  }
+
+  addToProgression() {
+    this.addChord.emit(this.controlsForm.controls.chordControl.value);
+  }
+
+  removeFromProgression() {
+    this.removeChord.emit(this.controlsForm.controls.chordControl.value);
   }
 }
