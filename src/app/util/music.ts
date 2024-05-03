@@ -8,7 +8,7 @@ export class Music {
     5: 'Perfect 4th',
     6: 'Tritone',
     7: 'Perfect 5th',
-    8: 'Minor 6th',
+    8: 'Augmented 5th',
     9: 'Major 6th',
     10: 'Minor 7th',
     11: 'Major 7th',
@@ -221,12 +221,24 @@ export class Music {
       selector: 'aug7/7+5/7#5/+7',
       chordIntervals: [0, 4, 8, 10.1] //Root, Major 3rd, Augmented 5th, Minor 7th
     },
+    'Augmented Major 7': {
+      name: 'Augmented Major 7',
+      minor: false,
+      regex: /(([A-G][#b]?augM7)|([A-G][#b]?M7\+5)|([A-G][#b]?M7#5)|([A-G][#b]?\+M7))/,
+      chordIntervals: [0, 4, 8, 11] //Root, Major 3rd, Augmented 5th, Minor 7th
+    },
     'Add 9': {
       name: 'Add 9',
       minor: false,
       regex: /([A-G][#b]?add9)/,
       selector: 'add9',
       chordIntervals: [0, 4, 7, 2] //Root, Major 3rd, Perfect 5th, Major 9th
+    },
+    'Minor Add 9': {
+      name: 'Minor Add 9',
+      minor: false,
+      regex: /([A-G][#b]?madd9)|([A-G][#b]?m\(add9\))/,
+      chordIntervals: [0, 3.1, 7, 2] //Root, Minor 3rd, Perfect 5th, Major 9th
     },
     'Add 2': {
       name: 'Add 2',
@@ -235,6 +247,12 @@ export class Music {
       selector: 'add2',
       chordIntervals: [0, 2, 4, 7] //Root, Major 2nd, Major 3rd, Perfect 5th
     },
+    'Minor Add 2': {
+      name: 'Minor Add 2',
+      minor: true,
+      regex: /([A-G][#b]?madd2)|([A-G][#b]?m\(add2\))/,
+      chordIntervals: [0, 2, 3.1, 7] //Root, Minor 2nd, Major 3rd, Perfect 5th
+    },
     'Add 11': {
       name: 'Add 11',
       minor: false,
@@ -242,12 +260,24 @@ export class Music {
       selector: 'add11',
       chordIntervals: [0, 4, 7, 5] //Root, Major 3rd, Perfect 5th, Major 11th
     },
+    'Minor Add 11': {
+      name: 'Minor Add 11',
+      minor: true,
+      regex: /([A-G][#b]?madd11)|([A-G][#b]?m\(add11\))/,
+      chordIntervals: [0, 3.1, 7, 5] //Root, Minor 3rd, Perfect 5th, Major 11th
+    },
     'Add 4': {
       name: 'Add 4',
       minor: false,
       regex: /([A-G][#b]?add4)/,
       selector: 'add4',
       chordIntervals: [0, 4, 5, 7] //Root, Major 3rd, Perfect 4th, Perfect 5th
+    },
+    'Minor Add 4': {
+      name: 'Minor Add 4',
+      minor: true,
+      regex: /([A-G][#b]?madd4)|([A-G][#b]?m\(add4\))/,
+      chordIntervals: [0, 3.1, 5, 7] //Root, Minor 3rd, Perfect 4th, Perfect 5th
     },
     'Suspended 4': {
       name: 'Suspended 4',

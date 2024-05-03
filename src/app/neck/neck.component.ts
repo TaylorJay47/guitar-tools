@@ -64,6 +64,10 @@ export class NeckComponent implements OnInit, DoCheck {
     }
   }
 
+  selectNote(note: string){
+
+  }
+
   toggleNote(note: string){
     this.noteToggleService.toggle(note);
   }

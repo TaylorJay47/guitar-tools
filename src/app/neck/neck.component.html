@@ -14,12 +14,13 @@
 
     <div class="neck-half-{{half}}" *ngFor="let half of [1,2]">
       <div class="notes">
-        <div *ngFor="let string of strings" [ngClass]="{string}">
+        <div *ngFor="let string of strings; let iString = index">
           <ul>
-            <li *ngFor="let note of string" appNote [note]="note" [type]="'note'" class="{{note}}" (click)="toggleNote(note)">{{note}}</li>
+            <li *ngFor="let note of string; let iNote = index" appNote [note]="note" [type]="'note'" class=" {{note}} string-{{iString}} fret-{{iNote}}" (click)="toggleNote(note)">{{note}}</li>
           </ul>
         </div>
       </div>
+
 
       <ul class="frets">
         <li *ngFor="let f of [].constructor(12)"></li>

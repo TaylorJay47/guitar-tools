@@ -192,7 +192,10 @@ export class NeckControlsComponent implements OnInit {
 
       this.flattenAndToggle(this.mode)
 
-    } else if (this.mode === 'chords' && this.chord) {
+    } else if (this.mode === 'chords') {
+      if (!this.chord) {
+        return;
+      }
       this.quality = this.chordDecoderService.decodeChord(this.chord).quality
       for (let int of this.chordDecoderService.decodeChord(this.chord).intervals) {
         let note = Music.notes[this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b' ?
@@ -200,6 +203,7 @@ export class NeckControlsComponent implements OnInit {
         this.noteToggleService.enabled.push(note)
         this.noteToggleService.flattened.push(note)
       }
+
       this.flattenAndToggle(this.mode)
       setTimeout(() => {
         if (this.chord.charAt(1) === '#' || this.chord.charAt(1) === 'b') {
