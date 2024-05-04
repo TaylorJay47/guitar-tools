@@ -1,0 +1,50 @@
+.settings-container {
+  width: 100%;
+  display: flex;
+  border: darkgrey 1px solid;
+  border-radius: 5px;
+  max-width: 930px;
+}
+
+.form-control {
+  vertical-align: center;
+}
+
+.strings-text-input {
+  @media screen and (max-width: 1000px) {
+    margin: 7px 5px 0 0 !important;
+  }
+}
+
+.buttons-container {
+  justify-content: center;
+  display: inline-flex;
+  flex-basis: 100%;
+}
+
+.info-container {
+  flex-basis: 100%;
+  justify-content: center;
+  margin: 10px;
+}
+
+label {
+  margin: 10px 5px 0 0 ;
+}
+
+input {
+  height: 30px;
+  width: 60px;
+  @media screen and (max-width: 1000px) {
+    margin: 5px !important;
+  }
+}
+
+button {
+  margin: 10px;
+  padding: 0 5px 0 5px;
+  max-height: 30px ;
+  @media screen and (max-width: 1000px) {
+    width: 75px;
+  }
+}

@@ -19,6 +19,7 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { InstrumentSettingsComponent } from './instrument-settings/instrument-settings.component';
 import { NeckHelpComponent } from './neck-help/neck-help.component';
 import { ChordProgressionComponent } from './chord-progression/chord-progression.component';
+import { ArpeggiatorComponent } from './arpeggiator/arpeggiator.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ChordProgressionComponent } from './chord-progression/chord-progression
     KeyboardComponent,
     InstrumentSettingsComponent,
     NeckHelpComponent,
-    ChordProgressionComponent
+    ChordProgressionComponent,
+    ArpeggiatorComponent
   ],
     imports: [
         BrowserModule,

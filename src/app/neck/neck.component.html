@@ -16,7 +16,10 @@
       <div class="notes">
         <div *ngFor="let string of strings; let iString = index">
           <ul>
-            <li *ngFor="let note of string; let iNote = index" appNote [note]="note" [type]="'note'" class=" {{note}} string-{{iString}} fret-{{iNote}}" (click)="toggleNote(note)">{{note}}</li>
+            <li *ngFor="let note of string; let iFret = index" appNote [note]="note" [type]="'note'"
+                [attr.fret]="(iFret+(12*(half-1)))" [attr.string]="iString+1" [attr.note]="note"
+                class=" {{note}} fret-{{iFret+(12*(half-1))}} string-{{iString+1}}"
+                (click)="onClick(note, (iFret+(12*(half-1))), iString)">{{note}}</li>
           </ul>
         </div>
       </div>
@@ -62,6 +65,12 @@
      aria-controls="collapseExample"
      placement="bottom"
      ngbTooltip="Show/Hide Chords"></i>
+  <i class="bi-lightning-charge neck-icon"
+     type="button"
+     (click)="arpeggiator.toggle()"
+     aria-controls="collapseExample"
+     placement="bottom"
+     ngbTooltip="Show/Hide Arpeggiator"></i>
 </div>
 <div class="collapseable-element-container">
   <div class="keyboard" #settings="ngbCollapse" [(ngbCollapse)]="isSettingsCollapsed">
@@ -81,6 +90,11 @@
 <div class="collapseable-element-container">
   <div class="keyboard" #help="ngbCollapse" [(ngbCollapse)]="isHelpCollapsed">
     <app-neck-help [mode]="mode"></app-neck-help>
+  </div>
+</div>
+<div class="collapseable-element-container">
+  <div class="keyboard" #arpeggiator="ngbCollapse" [(ngbCollapse)]="isArpeggiatorCollapsed">
+    <app-arpeggiator [mode]="mode" ></app-arpeggiator>
   </div>
 </div>
 <div class="controls">

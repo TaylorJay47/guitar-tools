@@ -225,6 +225,7 @@ export class Music {
       name: 'Augmented Major 7',
       minor: false,
       regex: /(([A-G][#b]?augM7)|([A-G][#b]?M7\+5)|([A-G][#b]?M7#5)|([A-G][#b]?\+M7))/,
+      selector: 'augM7/M7+5/M7#5/+M7',
       chordIntervals: [0, 4, 8, 11] //Root, Major 3rd, Augmented 5th, Minor 7th
     },
     'Add 9': {
@@ -238,6 +239,7 @@ export class Music {
       name: 'Minor Add 9',
       minor: false,
       regex: /([A-G][#b]?madd9)|([A-G][#b]?m\(add9\))/,
+      selector: 'madd9',
       chordIntervals: [0, 3.1, 7, 2] //Root, Minor 3rd, Perfect 5th, Major 9th
     },
     'Add 2': {
@@ -251,6 +253,7 @@ export class Music {
       name: 'Minor Add 2',
       minor: true,
       regex: /([A-G][#b]?madd2)|([A-G][#b]?m\(add2\))/,
+      selector: 'madd2',
       chordIntervals: [0, 2, 3.1, 7] //Root, Minor 2nd, Major 3rd, Perfect 5th
     },
     'Add 11': {
@@ -264,6 +267,7 @@ export class Music {
       name: 'Minor Add 11',
       minor: true,
       regex: /([A-G][#b]?madd11)|([A-G][#b]?m\(add11\))/,
+      selector: 'madd11',
       chordIntervals: [0, 3.1, 7, 5] //Root, Minor 3rd, Perfect 5th, Major 11th
     },
     'Add 4': {
@@ -277,6 +281,7 @@ export class Music {
       name: 'Minor Add 4',
       minor: true,
       regex: /([A-G][#b]?madd4)|([A-G][#b]?m\(add4\))/,
+      selector: 'madd4',
       chordIntervals: [0, 3.1, 5, 7] //Root, Minor 3rd, Perfect 4th, Perfect 5th
     },
     'Suspended 4': {

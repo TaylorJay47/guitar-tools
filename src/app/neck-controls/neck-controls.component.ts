@@ -65,19 +65,17 @@ export class NeckControlsComponent implements OnInit {
               this.controlsForm.controls.keyControl.setValue(tempScale?.substring(0,2));
               this.controlsForm.controls.qualityControl.setValue(tempScale?.substring(2));
             }, 5);
-            console.log(this.controlsForm.controls.qualityControl.value);
             this.key = tempScale?.substring(0,2);
             this.quality = tempScale?.substring(2);
-            console.log(this.quality);
           } else {
             setTimeout(() => {
               this.controlsForm.controls.keyControl.setValue(tempScale?.charAt(0));
               this.controlsForm.controls.qualityControl.setValue(tempScale?.substring(1).replace(/(?!^)[A-Z]/g, letter => ` ${letter}`));
             }, 5);
-            console.log(this.controlsForm.controls.qualityControl.value);
             this.key = tempScale?.charAt(0);
             this.quality = tempScale?.substring(1).replace(/(?!^)[A-Z]/g, letter => ` ${letter}`);
           }
+          this.onSubmit();
         }
       case 'chords':
         const tempChord = this.route.snapshot.paramMap.get('chord');
@@ -115,7 +113,7 @@ export class NeckControlsComponent implements OnInit {
           Music.quality[this.quality].scaleIntervals : Music.quality[this.quality].chordIntervals, this.mode)
       }, 300)
     }
-    this.noteToggleService.octave = 1;
+    this.noteToggleService.octave = 2;
   }
 
   flattenAndToggle(page: string) {
@@ -159,6 +157,7 @@ export class NeckControlsComponent implements OnInit {
     if (this.isLoading) {
       return;
     }
+    this.ready = false;
     this.isLoading = true;
     this.resetVariables()
     this.noteToggleService.resetColors()
@@ -191,6 +190,7 @@ export class NeckControlsComponent implements OnInit {
       }
 
       this.flattenAndToggle(this.mode)
+      this.ready = true;
 
     } else if (this.mode === 'chords') {
       if (!this.chord) {
