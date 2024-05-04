@@ -1,0 +1,15 @@
+<div class="settings-container">
+  <div class="info-container">
+    <div class="starting-note">
+      <p *ngIf="!startingFret && !errorMessage">Select a starting note</p>
+      <p *ngIf="startingFret">Starting Note: {{this.startingNote}} on Fret {{this.startingFret}} and String {{this.startingString}}</p>
+    </div>
+    <div class="ending-note" *ngIf="startingFret">
+      <p *ngIf="!endingFret">Select an ending note</p>
+      <p *ngIf="endingFret">Ending Note: {{this.endingNote}} on Fret {{this.endingFret}} and String {{this.endingString}}</p>
+    </div>
+    <div class="error-message">
+      <p *ngIf="errorMessage">{{this.errorMessage}}</p>
+    </div>
+  </div>
+</div>

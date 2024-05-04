@@ -4,6 +4,7 @@ import { Music } from '../util/music';
 import {NoteToggleService} from "../services/note-toggle.service";
 import {NeckControlsComponent} from "../neck-controls/neck-controls.component";
 import {ChordProgressionComponent} from "../chord-progression/chord-progression.component";
+import {ArpeggiatorComponent} from "../arpeggiator/arpeggiator.component";
 
 @Component({
   selector: 'app-scale-chart',
@@ -14,6 +15,7 @@ export class NeckComponent implements OnInit, DoCheck {
   @Input() mode: string = 'scales'
   @ViewChild(NeckControlsComponent) child: NeckControlsComponent;
   @ViewChild(ChordProgressionComponent) chordProgressionComponent: ChordProgressionComponent;
+  @ViewChild(ArpeggiatorComponent) arpeggiatorComponent: ArpeggiatorComponent;
   key: string = 'C';
   quality: string = 'Major';
   oldKey = 'C'
@@ -27,6 +29,7 @@ export class NeckComponent implements OnInit, DoCheck {
   public isHelpCollapsed = true;
   public isSettingsCollapsed = true;
   public isChordsCollapsed = false;
+  public isArpeggiatorCollapsed = true;
   frets = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24];
 
   constructor(private noteToggleService: NoteToggleService) {}
@@ -64,8 +67,13 @@ export class NeckComponent implements OnInit, DoCheck {
     }
   }
 
-  toggleNote(note: string){
-    this.noteToggleService.toggle(note);
+  onClick(note: string, fret: number, string: number) {
+    string = string + 1;
+    if (!this.isArpeggiatorCollapsed) {
+      this.arpeggiatorComponent.noteSelected(note, fret, string);
+    } else {
+      this.noteToggleService.toggle(note);
+    }
   }
 
   sendChord() {
