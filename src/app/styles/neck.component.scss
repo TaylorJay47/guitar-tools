@@ -187,14 +187,16 @@
 }
 
 .controls {
-  position: relative;
+  position: absolute;
   left: 50%;
   margin-left: -475px;
-  padding-bottom: 100px;
+  height: 263px;
+
   @media screen and (max-width: 1000px) {
-    left: 0;
+    overflow: visible;
+    left: 5vw;
     margin-left: 0;
-    width: 100vw - 10;
+    width: 100vw - 20;
   }
 }
 

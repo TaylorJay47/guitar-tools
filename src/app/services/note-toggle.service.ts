@@ -10,6 +10,7 @@ export class NoteToggleService {
   flattened: string[] = []
   octave = 1;
   prevNoteInt = 0;
+  isArpeggiator: boolean = false;
 
 
   constructor() { }
@@ -75,12 +76,15 @@ export class NoteToggleService {
         let noteEl = $('[type="note"].' + note.charAt(0) + 'b')
         this.toggleNote('[type="note"].' + note.charAt(0) + 'b', note)
         this.toggleNote('.tuning .' + note.charAt(0) + 'b', note, false)
-
       }
     } else {
       this.toggleNote('[type="note"].' + note, note)
       this.toggleNote('.tuning .' + note, note, false)
     }
+  }
+
+  toggleFretAndString(note: string, fret: number, string: number) {
+    this.toggleNote(`.fret-${fret}.string-${string}`, note)
   }
 
   colorKey(note: string, intervals: [], mode: string) {
