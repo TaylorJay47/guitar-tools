@@ -26,7 +26,8 @@
       "dom"
     ],
     "types": [
-      "jquery"
+      "jquery",
+      "node"
     ],
     "useDefineForClassFields": false
   },
