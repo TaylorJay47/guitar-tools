@@ -11,12 +11,15 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/jay-tools",
+            "outputPath": {
+              "base": "dist/jay-tools"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
@@ -28,7 +31,8 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -51,7 +55,6 @@
                 }
               ],
               "outputHashing": "all",
-              "buildOptimizer": false,
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -61,7 +64,6 @@
               }
             },
             "development": {
-              "buildOptimizer": true,
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -69,7 +71,6 @@
                   "inlineCritical": false
                 }
               },
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
